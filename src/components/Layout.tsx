@@ -14,7 +14,8 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
+      {/* Ensures full height */}
       <header className="bg-black text-white w-screen sticky top-0 z-50">
         <nav className="px-6 py-4 flex items-center justify-between">
           {/* Logo Section */}
@@ -317,7 +318,7 @@ const Layout = ({ children }) => {
           </div>
         </nav>
       </header>
-      <main className="w-screen overflow-hidden">
+      <main className="flex-grow w-screen overflow-hidden">
         <div className="w-screen">{children}</div>
       </main>
       <footer className="bg-black text-white py-8">
@@ -431,7 +432,7 @@ const Layout = ({ children }) => {
           reserved.
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 
