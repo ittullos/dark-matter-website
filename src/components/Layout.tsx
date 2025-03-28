@@ -257,12 +257,115 @@ const Layout = ({ children }) => {
       <main className="w-screen overflow-hidden">
         <div className="w-screen">{children}</div>
       </main>
-      <footer className="bg-black text-white py-4">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p>
-            &copy; {new Date().getFullYear()} DARK MATTER LLC. All rights
-            reserved.
-          </p>
+      <footer className="bg-black text-white py-8">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col items-center">
+          {/* Logo Section */}
+          <Link href="/">
+            <a className="flex items-center mb-4 md:mb-0">
+              <img
+                src="/logo.png"
+                alt="Logo"
+                className="h-12 w-auto max-w-full object-contain"
+              />
+            </a>
+          </Link>
+
+          {/* Social Media Icons */}
+          <div className="flex space-x-4 mb-6">
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/darkmatterbassmusic/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="hover:opacity-75 transition"
+            >
+              <img
+                src="/instagram-white-icon.png"
+                alt="Instagram"
+                className="h-6 w-6"
+              />
+            </a>
+
+            {/* Facebook */}
+            <a
+              href="https://www.facebook.com/darkmatterbassmusic"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="hover:opacity-75 transition"
+            >
+              <img
+                src="/facebook-app-round-white-icon.png"
+                alt="Facebook"
+                className="h-6 w-6"
+              />
+            </a>
+
+            {/* Spotify */}
+            <a
+              href="https://open.spotify.com/artist/71c783dJDlJ3pqD7cFIOQq?si=r1kWgk6GR5urDLEAUk65GQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Spotify"
+              className="hover:opacity-75 transition"
+            >
+              <img src="/spotify-icon.png" alt="Spotify" className="h-6 w-6" />
+            </a>
+
+            {/* SoundCloud */}
+            <a
+              href="https://soundcloud.com/darkmatterbassmusic"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="SoundCloud"
+              className="hover:opacity-75 transition"
+            >
+              <img
+                src="/soundcloud-white-icon.png"
+                alt="SoundCloud"
+                className="h-6 w-6"
+              />
+            </a>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="flex flex-wrap justify-center space-x-6">
+            <Link href="/music">
+              <a className="text-sm text-white hover:text-blue-400 transition">
+                Music
+              </a>
+            </Link>
+            <Link href="/merch">
+              <a className="text-sm text-white hover:text-blue-400 transition">
+                Merch
+              </a>
+            </Link>
+            <Link href="/tour">
+              <a className="text-sm text-white hover:text-blue-400 transition">
+                Tour
+              </a>
+            </Link>
+            <Link href="/media">
+              <a className="text-sm text-white hover:text-blue-400 transition">
+                Media
+              </a>
+            </Link>
+            <Link href="/mentoring">
+              <a className="text-sm text-white hover:text-blue-400 transition">
+                Mentoring
+              </a>
+            </Link>
+            <Link href="/commissions">
+              <a className="text-sm text-white hover:text-blue-400 transition">
+                Commissions
+              </a>
+            </Link>
+          </nav>
+        </div>
+        <div className="text-center mt-6 text-sm text-gray-400">
+          &copy; {new Date().getFullYear()} DARK MATTER LLC. All rights
+          reserved.
         </div>
       </footer>
     </>
