@@ -72,6 +72,69 @@ const Layout = ({ children }) => {
               </a>
             </Link>
 
+            {/* Social Media Icons */}
+            <div className="flex space-x-4 pb-10 md:hidden">
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/darkmatterbassmusic/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="hover:opacity-75 transition"
+              >
+                <img
+                  src="/instagram-white-icon.png"
+                  alt="Instagram"
+                  className="h-6 w-6"
+                />
+              </a>
+
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/darkmatterbassmusic"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="hover:opacity-75 transition"
+              >
+                <img
+                  src="/facebook-app-round-white-icon.png"
+                  alt="Facebook"
+                  className="h-6 w-6"
+                />
+              </a>
+
+              {/* Spotify */}
+              <a
+                href="https://open.spotify.com/artist/71c783dJDlJ3pqD7cFIOQq?si=r1kWgk6GR5urDLEAUk65GQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Spotify"
+                className="hover:opacity-75 transition"
+              >
+                <img
+                  src="/spotify-icon.png"
+                  alt="Spotify"
+                  className="h-6 w-6"
+                />
+              </a>
+
+              {/* SoundCloud */}
+              <a
+                href="https://soundcloud.com/darkmatterbassmusic"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="SoundCloud"
+                className="hover:opacity-75 transition"
+              >
+                <img
+                  src="/soundcloud-white-icon.png"
+                  alt="SoundCloud"
+                  className="h-6 w-6"
+                />
+              </a>
+            </div>
+
             {/* Close Button */}
             <button
               className="absolute top-4 right-4 text-white focus:outline-none md:hidden"
@@ -271,7 +334,7 @@ const Layout = ({ children }) => {
           </Link>
 
           {/* Social Media Icons */}
-          <div className="flex space-x-4 mb-6">
+          <div className="flex space-x-4 mb-6 md:mt-4">
             {/* Instagram */}
             <a
               href="https://www.instagram.com/darkmatterbassmusic/"
