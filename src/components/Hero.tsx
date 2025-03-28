@@ -1,23 +1,37 @@
 import * as React from "react";
 import Image from "next/image";
 
-import type { PrintfulProduct } from "../types";
-
 type HeroProps = {
-  product: PrintfulProduct;
+  imageSrc: string; // URL of the hero image
+  imageAlt: string; // Alt text for the image
+  title?: string; // Optional title
+  description?: string; // Optional description
 };
 
-const Hero: React.FC<HeroProps> = ({ product }) => (
-  <div className="bg-gray-50 p-6 md:p-12">
-    <div className="flex items-center">
-      <div className="flex items-center justify-center flex-1 sm:flex-shrink-0 md:w-1/3 p-6">
-        image
-      </div>
-      <div className="md:w-2/3">
-        <h1 className="text-gray-900 text-xl md:text-3xl font-bold">
-          {product.name}
-        </h1>
-      </div>
+const Hero: React.FC<HeroProps> = ({
+  imageSrc,
+  imageAlt,
+  title,
+  description,
+}) => (
+  <div className="relative bg-black text-white w-screen h-[calc(100vh-64px)] overflow-hidden">
+    {/* Hero Image */}
+    <div className="relative w-full h-full">
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        layout="fill"
+        objectFit="cover"
+        className="opacity-80"
+      />
+    </div>
+
+    {/* Overlay Content */}
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+      {title && (
+        <h1 className="text-3xl md:text-5xl font-bold mb-4">{title}</h1>
+      )}
+      {description && <p className="text-lg md:text-xl">{description}</p>}
     </div>
   </div>
 );

@@ -214,7 +214,7 @@ const Layout = ({ children }) => {
         </nav>
       </header>
       <main className="py-6">
-        <div className="max-w-6xl mx-auto px-6">{children}</div>
+        <div className="w-screen overflow-hidden">{children}</div>
       </main>
       <footer className="bg-black text-white py-4">
         <div className="max-w-6xl mx-auto px-6 text-center">
