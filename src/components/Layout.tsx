@@ -51,7 +51,7 @@ const Layout = ({ children }) => {
           {/* Navigation Links */}
           <div
             id="mobile-menu"
-            className="hidden fixed inset-0 bg-gray-900 bg-opacity-90 z-50 flex flex-col items-center justify-center space-y-6 md:relative md:flex md:flex-row md:items-center md:space-y-0 md:space-x-6 md:bg-transparent md:bg-opacity-0"
+            className="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex flex-col items-center justify-center space-y-6 md:relative md:flex md:flex-row md:items-center md:space-y-0 md:space-x-6 md:bg-transparent md:bg-opacity-0"
           >
             {/* Close Button */}
             <button

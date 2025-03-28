@@ -17,7 +17,7 @@ class MyDocument extends Document {
           />
           <link href="/favicon.ico" rel="shortcut icon" />
         </Head>
-        <body className="antialiased">
+        <body className="bg-black text-white antialiased">
           <Main />
           <NextScript />
           <script
