@@ -16,7 +16,7 @@ const Hero: React.FC<HeroProps> = ({
 }) => (
   <div className="relative bg-black text-white w-screen h-[calc(100vh-64px)] overflow-hidden">
     {/* Hero Image */}
-    <div className="relative w-full h-full">
+    <div className="absolute top-0 left-0 w-full h-full">
       <Image
         src={imageSrc}
         alt={imageAlt}

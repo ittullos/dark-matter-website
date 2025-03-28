@@ -8,17 +8,22 @@ const Layout = ({ children }) => {
   const { cart } = useSnipcartCount();
   const cartHasItems = cart.items.count !== 0;
 
+  const closeMobileMenu = () => {
+    const menu = document.getElementById("mobile-menu");
+    if (menu) menu.classList.add("hidden");
+  };
+
   return (
     <>
-      <header className="bg-black text-white">
-        <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <header className="bg-black text-white w-screen sticky top-0 z-50">
+        <nav className="px-6 py-4 flex items-center justify-between">
           {/* Logo Section */}
           <Link href="/">
             <a className="flex items-center">
               <img
                 src="/logo.png"
                 alt="Logo"
-                className="h-8 w-auto mr-3 lg:h-10"
+                className="h-10 w-auto max-w-full object-contain"
               />
             </a>
           </Link>
@@ -53,6 +58,20 @@ const Layout = ({ children }) => {
             id="mobile-menu"
             className="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex flex-col items-center justify-center space-y-6 md:relative md:flex md:flex-row md:items-center md:space-y-0 md:space-x-6 md:bg-transparent md:bg-opacity-0"
           >
+            {/* Logo in Mobile Menu */}
+            <Link href="/">
+              <a
+                className="flex items-center md:hidden"
+                onClick={closeMobileMenu} // Close menu when logo is clicked
+              >
+                <img
+                  src="/logo.png"
+                  alt="Logo"
+                  className="h-12 w-auto max-w-full object-contain"
+                />
+              </a>
+            </Link>
+
             {/* Close Button */}
             <button
               className="absolute top-4 right-4 text-white focus:outline-none md:hidden"
@@ -95,7 +114,10 @@ const Layout = ({ children }) => {
                 </svg>
               </button>
               <Link href="/wishlist">
-                <a className="relative text-white hover:text-blue-400 transition">
+                <a
+                  className="relative text-white hover:text-blue-400 transition"
+                  onClick={closeMobileMenu}
+                >
                   {hasItems && (
                     <span className="absolute bg-red-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
                   )}
@@ -113,6 +135,7 @@ const Layout = ({ children }) => {
               <button
                 className="snipcart-checkout text-white hover:text-blue-400 transition relative"
                 aria-label="Cart"
+                onClick={closeMobileMenu}
               >
                 {cartHasItems && (
                   <span className="absolute bg-blue-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
@@ -130,32 +153,50 @@ const Layout = ({ children }) => {
             </div>
 
             <Link href="/music">
-              <a className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition">
+              <a
+                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+                onClick={closeMobileMenu}
+              >
                 Music
               </a>
             </Link>
             <Link href="/merch">
-              <a className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition">
+              <a
+                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+                onClick={closeMobileMenu}
+              >
                 Merch
               </a>
             </Link>
             <Link href="/tour">
-              <a className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition">
+              <a
+                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+                onClick={closeMobileMenu}
+              >
                 Tour
               </a>
             </Link>
             <Link href="/media">
-              <a className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition">
+              <a
+                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+                onClick={closeMobileMenu}
+              >
                 Media
               </a>
             </Link>
             <Link href="/mentoring">
-              <a className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition">
+              <a
+                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+                onClick={closeMobileMenu}
+              >
                 Mentoring
               </a>
             </Link>
             <Link href="/commissions">
-              <a className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition">
+              <a
+                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+                onClick={closeMobileMenu}
+              >
                 Commissions
               </a>
             </Link>
@@ -164,7 +205,7 @@ const Layout = ({ children }) => {
           {/* Wishlist and Cart Section for Desktop */}
           <div className="hidden md:flex items-center space-x-4">
             <button
-              className="snipcart-customer-signin text-white hover:text-blue-400 transition"
+              className="snipcart-customer-signin text-white hover:text-blue-400 transition pl-3"
               aria-label="User login"
             >
               <svg
@@ -213,8 +254,8 @@ const Layout = ({ children }) => {
           </div>
         </nav>
       </header>
-      <main className="py-6">
-        <div className="w-screen overflow-hidden">{children}</div>
+      <main className="w-screen overflow-hidden">
+        <div className="w-screen">{children}</div>
       </main>
       <footer className="bg-black text-white py-4">
         <div className="max-w-6xl mx-auto px-6 text-center">
