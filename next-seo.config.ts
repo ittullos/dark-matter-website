@@ -1,7 +1,7 @@
 const description =
-  "Launch your own fully automated store with Snipcart, Printful, and Next.js";
-const title = "DARK MATTER BASS MUSIC";
-const url = "https://swag.nextdropshippingstarter.com";
+  "Discover DARK MATTER, an EDM producer duo specializing in Dubstep. Explore our music, mentoring programs, exclusive sample packs, and merch for sale. Join the DARK MATTER experience today!";
+const title = "DARK MATTER - EDM Producer Duo";
+const url = "https://darkmatterbassmusic.com";
 
 const seo = {
   title,
@@ -14,8 +14,8 @@ const seo = {
     url,
   },
   twitter: {
-    handle: "@notrab",
-    site: "@notrab",
+    handle: "@darkmatterbassmusic",
+    site: "@darkmatterbassmusic",
   },
 };
 
