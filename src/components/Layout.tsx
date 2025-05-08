@@ -15,18 +15,16 @@ const Layout = ({ children }) => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Ensures full height */}
+      {/* Header */}
       <header className="bg-black text-white w-screen sticky top-0 z-50">
         <nav className="px-6 py-4 flex items-center justify-between">
           {/* Logo Section */}
-          <Link href="/">
-            <a className="flex items-center">
-              <img
-                src="/logo.png"
-                alt="Logo"
-                className="h-10 w-auto max-w-full object-contain"
-              />
-            </a>
+          <Link href="/" className="flex items-center">
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="h-10 w-auto max-w-full object-contain"
+            />
           </Link>
 
           {/* Hamburger Menu Button */}
@@ -60,17 +58,16 @@ const Layout = ({ children }) => {
             className="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex flex-col items-center justify-center space-y-6 md:relative md:flex md:flex-row md:items-center md:space-y-0 md:space-x-6 md:bg-transparent md:bg-opacity-0"
           >
             {/* Logo in Mobile Menu */}
-            <Link href="/">
-              <a
-                className="flex items-center md:hidden"
-                onClick={closeMobileMenu} // Close menu when logo is clicked
-              >
-                <img
-                  src="/logo.png"
-                  alt="Logo"
-                  className="h-12 w-auto max-w-full object-contain"
-                />
-              </a>
+            <Link
+              href="/"
+              className="flex items-center md:hidden"
+              onClick={closeMobileMenu}
+            >
+              <img
+                src="/logo.png"
+                alt="Logo"
+                className="h-12 w-auto max-w-full object-contain"
+              />
             </Link>
 
             {/* Social Media Icons */}
@@ -163,41 +160,39 @@ const Layout = ({ children }) => {
 
             {/* Wishlist and Cart Icons for Mobile */}
             <div className="flex items-center space-x-4 mb-4 md:hidden">
-              <Link href="/profile">
-                <a
-                  className="snipcart-customer-signin text-white hover:text-blue-400 transition"
-                  aria-label="Profile"
-                  onClick={closeMobileMenu}
+              <Link
+                href="/profile"
+                className="snipcart-customer-signin text-white hover:text-blue-400 transition"
+                aria-label="Profile"
+                onClick={closeMobileMenu}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  className="h-6 w-6"
+                  fill="currentColor"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    className="h-6 w-6"
-                    fill="currentColor"
-                  >
-                    <path fill="none" d="M0 0h24V24H0z" />
-                    <path d="M4 22a8 8 0 1 1 16 0h-2a6 6 0 1 0-12 0H4zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
-                  </svg>
-                </a>
+                  <path fill="none" d="M0 0h24V24H0z" />
+                  <path d="M4 22a8 8 0 1 1 16 0h-2a6 6 0 1 0-12 0H4zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
+                </svg>
               </Link>
-              <Link href="/wishlist">
-                <a
-                  className="relative text-white hover:text-blue-400 transition"
-                  onClick={closeMobileMenu}
+              <Link
+                href="/wishlist"
+                className="relative text-white hover:text-blue-400 transition"
+                onClick={closeMobileMenu}
+              >
+                {hasItems && (
+                  <span className="absolute bg-red-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
+                )}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  className="h-6 w-6"
+                  fill="currentColor"
                 >
-                  {hasItems && (
-                    <span className="absolute bg-red-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
-                  )}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    className="h-6 w-6"
-                    fill="currentColor"
-                  >
-                    <path fill="none" d="M0 0H24V24H0z" />
-                    <path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228zm6.826 1.641c-1.5-1.502-3.92-1.563-5.49-.153l-1.335 1.198-1.336-1.197c-1.575-1.412-3.99-1.35-5.494.154-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454z" />
-                  </svg>
-                </a>
+                  <path fill="none" d="M0 0H24V24H0z" />
+                  <path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228zm6.826 1.641c-1.5-1.502-3.92-1.563-5.49-.153l-1.335 1.198-1.336-1.197c-1.575-1.412-3.99-1.35-5.494.154-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454z" />
+                </svg>
               </Link>
               <button
                 className="snipcart-checkout text-white hover:text-blue-400 transition relative"
@@ -219,83 +214,78 @@ const Layout = ({ children }) => {
               </button>
             </div>
 
-            <Link href="/music">
-              <a
-                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
-                onClick={closeMobileMenu}
-              >
-                Music
-              </a>
+            <Link
+              href="/music"
+              className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+              onClick={closeMobileMenu}
+            >
+              Music
             </Link>
-            <Link href="/merch">
-              <a
-                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
-                onClick={closeMobileMenu}
-              >
-                Merch
-              </a>
+            <Link
+              href="/merch"
+              className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+              onClick={closeMobileMenu}
+            >
+              Merch
             </Link>
-            <Link href="/tour">
-              <a
-                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
-                onClick={closeMobileMenu}
-              >
-                Tour
-              </a>
+            <Link
+              href="/tour"
+              className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+              onClick={closeMobileMenu}
+            >
+              Tour
             </Link>
-            <Link href="/media">
-              <a
-                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
-                onClick={closeMobileMenu}
-              >
-                Media
-              </a>
+            <Link
+              href="/media"
+              className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+              onClick={closeMobileMenu}
+            >
+              Media
             </Link>
-            <Link href="/producer_shop">
-              <a
-                className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
-                onClick={closeMobileMenu}
-              >
-                Producer Shop
-              </a>
+            <Link
+              href="/producer_shop"
+              className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
+              onClick={closeMobileMenu}
+            >
+              Producer Shop
             </Link>
           </div>
 
           {/* Wishlist and Cart Section for Desktop */}
           <div className="hidden md:flex items-center space-x-4">
             {/* Profile Icon */}
-            <Link href="/profile">
-              <a
-                className="relative text-white hover:text-blue-400 transition"
-                aria-label="Profile"
+            <Link
+              href="/profile"
+              className="relative text-white hover:text-blue-400 transition"
+              aria-label="Profile"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                className="h-5 w-5 lg:h-6 lg:w-6"
+                fill="currentColor"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5 lg:h-6 lg:w-6"
-                  fill="currentColor"
-                >
-                  <path fill="none" d="M0 0h24V24H0z" />
-                  <path d="M4 22a8 8 0 1 1 16 0h-2a6 6 0 1 0-12 0H4zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
-                </svg>
-              </a>
+                <path fill="none" d="M0 0h24V24H0z" />
+                <path d="M4 22a8 8 0 1 1 16 0h-2a6 6 0 1 0-12 0H4zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
+              </svg>
             </Link>
             {/* Wishlist Icon */}
-            <Link href="/wishlist">
-              <a className="relative text-white hover:text-blue-400 transition">
-                {hasItems && (
-                  <span className="absolute bg-red-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
-                )}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5 lg:h-6 lg:w-6"
-                  fill="currentColor"
-                >
-                  <path fill="none" d="M0 0H24V24H0z" />
-                  <path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228zm6.826 1.641c-1.5-1.502-3.92-1.563-5.49-.153l-1.335 1.198-1.336-1.197c-1.575-1.412-3.99-1.35-5.494.154-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454z" />
-                </svg>
-              </a>
+            <Link
+              href="/wishlist"
+              className="relative text-white hover:text-blue-400 transition"
+            >
+              {hasItems && (
+                <span className="absolute bg-red-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
+              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                className="h-5 w-5 lg:h-6 lg:w-6"
+                fill="currentColor"
+              >
+                <path fill="none" d="M0 0H24V24H0z" />
+                <path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228zm6.826 1.641c-1.5-1.502-3.92-1.563-5.49-.153l-1.335 1.198-1.336-1.197c-1.575-1.412-3.99-1.35-5.494.154-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454z" />
+              </svg>
             </Link>
             {/* Cart Icon */}
             <button
@@ -321,17 +311,16 @@ const Layout = ({ children }) => {
       <main className="flex-grow w-screen overflow-hidden">
         <div className="w-screen">{children}</div>
       </main>
+      {/* Footer Section */}
       <footer className="bg-black text-white py-8">
         <div className="max-w-6xl mx-auto px-6 flex flex-col items-center">
           {/* Logo Section */}
-          <Link href="/">
-            <a className="flex items-center mb-4 md:mb-0">
-              <img
-                src="/logo.png"
-                alt="Logo"
-                className="h-12 w-auto max-w-full object-contain"
-              />
-            </a>
+          <Link href="/" className="flex items-center mb-4 md:mb-0">
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="h-12 w-auto max-w-full object-contain"
+            />
           </Link>
 
           {/* Social Media Icons */}
@@ -395,30 +384,35 @@ const Layout = ({ children }) => {
 
           {/* Navigation Links */}
           <nav className="flex flex-wrap justify-center space-x-6">
-            <Link href="/music">
-              <a className="text-sm text-white hover:text-blue-400 transition">
-                Music
-              </a>
+            <Link
+              href="/music"
+              className="text-sm text-white hover:text-blue-400 transition"
+            >
+              Music
             </Link>
-            <Link href="/merch">
-              <a className="text-sm text-white hover:text-blue-400 transition">
-                Merch
-              </a>
+            <Link
+              href="/merch"
+              className="text-sm text-white hover:text-blue-400 transition"
+            >
+              Merch
             </Link>
-            <Link href="/tour">
-              <a className="text-sm text-white hover:text-blue-400 transition">
-                Tour
-              </a>
+            <Link
+              href="/tour"
+              className="text-sm text-white hover:text-blue-400 transition"
+            >
+              Tour
             </Link>
-            <Link href="/media">
-              <a className="text-sm text-white hover:text-blue-400 transition">
-                Media
-              </a>
+            <Link
+              href="/media"
+              className="text-sm text-white hover:text-blue-400 transition"
+            >
+              Media
             </Link>
-            <Link href="/producer_shop">
-              <a className="text-sm text-white hover:text-blue-400 transition">
-                Producer Shop
-              </a>
+            <Link
+              href="/producer_shop"
+              className="text-sm text-white hover:text-blue-400 transition"
+            >
+              Producer Shop
             </Link>
           </nav>
         </div>
