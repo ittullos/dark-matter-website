@@ -160,7 +160,7 @@ const Layout = ({ children }) => {
 
             {/* Wishlist and Cart Icons for Mobile */}
             <div className="flex items-center space-x-4 mb-4 md:hidden">
-              <Link
+              {/* <Link
                 href="/profile"
                 className="snipcart-customer-signin text-white hover:text-blue-400 transition"
                 aria-label="Profile"
@@ -175,7 +175,7 @@ const Layout = ({ children }) => {
                   <path fill="none" d="M0 0h24V24H0z" />
                   <path d="M4 22a8 8 0 1 1 16 0h-2a6 6 0 1 0-12 0H4zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
                 </svg>
-              </Link>
+              </Link> */}
               <Link
                 href="/wishlist"
                 className="relative text-white hover:text-blue-400 transition"
@@ -254,7 +254,7 @@ const Layout = ({ children }) => {
           {/* Wishlist and Cart Section for Desktop */}
           <div className="hidden md:flex items-center space-x-4">
             {/* Profile Icon */}
-            <Link
+            {/* <Link
               href="/profile"
               className="relative text-white hover:text-blue-400 transition"
               aria-label="Profile"
@@ -268,7 +268,7 @@ const Layout = ({ children }) => {
                 <path fill="none" d="M0 0h24V24H0z" />
                 <path d="M4 22a8 8 0 1 1 16 0h-2a6 6 0 1 0-12 0H4zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
               </svg>
-            </Link>
+            </Link> */}
             {/* Wishlist Icon */}
             <Link
               href="/wishlist"

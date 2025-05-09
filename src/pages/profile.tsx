@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getSession, signOut } from "next-auth/react";
 
 const Profile = ({ user, orders }) => {
+  useEffect(() => {
+    const logIntoSnipcart = async () => {
+      if (user?.email) {
+        console.log("Logging into Snipcart with:", user.email);
+
+        // Wait for Snipcart to be ready
+        if (typeof window.Snipcart === "undefined") {
+          document.addEventListener("snipcart.ready", () => {
+            window.Snipcart.api.customer.signin({
+              email: user.email,
+              firstName: user.name.split(" ")[0],
+              lastName: user.name.split(" ")[1] || "",
+            });
+          });
+        } else {
+          window.Snipcart.api.customer.signin({
+            email: user.email,
+            firstName: user.name.split(" ")[0],
+            lastName: user.name.split(" ")[1] || "",
+          });
+        }
+      }
+    };
+
+    logIntoSnipcart();
+  }, [user]);
+
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
@@ -62,12 +89,13 @@ const Profile = ({ user, orders }) => {
 };
 
 export async function getServerSideProps(context) {
+  console.log("Snipcart Secret API Key:", process.env.SNIPCART_SECRET_API_KEY);
   const session = await getSession(context);
 
   if (!session) {
     return {
       redirect: {
-        destination: "/api/auth/signin",
+        destination: "/auth/signin",
         permanent: false,
       },
     };
@@ -78,7 +106,7 @@ export async function getServerSideProps(context) {
     const res = await fetch("https://app.snipcart.com/api/orders", {
       headers: {
         Authorization: `Basic ${Buffer.from(
-          process.env.NEXT_PUBLIC_SNIPCART_API_KEY + ":"
+          process.env.SNIPCART_SECRET_API_KEY + ":"
         ).toString("base64")}`,
       },
     });
