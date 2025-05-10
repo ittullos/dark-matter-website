@@ -28,18 +28,25 @@ const BandsintownTour: React.FC<BandsintownTourProps> = ({
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          `https://rest.bandsintown.com/artists/${encodeURIComponent(
-            artistName
-          )}/events?app_id=${apiKey}`
+          `https://rest.bandsintown.com/artists/id_${15558001}/events?app_id=${apiKey}`
         );
+
+        console.log("Response Status:", response.status);
+
+        // Clone the response for debugging purposes
+        const responseClone = response.clone();
+        const responseText = await responseClone.text();
+        console.log("Response Body:", responseText);
 
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }
 
         const data = await response.json();
+        console.log("Events Data:", data);
         setEvents(data);
       } catch (err: any) {
+        console.error("Error fetching events:", err.message);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -77,14 +84,16 @@ const BandsintownTour: React.FC<BandsintownTourProps> = ({
               {event.venue.city}, {event.venue.country}
             </p>
             <p>{new Date(event.datetime).toLocaleDateString()}</p>
-            <a
-              href={event.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline"
-            >
-              View Details
-            </a>
+            <div className="mt-4">
+              <a
+                href={event.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+              >
+                Buy Tickets
+              </a>
+            </div>
           </li>
         ))}
       </ul>

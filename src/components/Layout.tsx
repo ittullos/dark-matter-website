@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect } from "react";
 
 import useWishlistState from "../hooks/useWishlistState";
 import useSnipcartCount from "../hooks/useSnipcartCount";
@@ -13,11 +14,48 @@ const Layout = ({ children }) => {
     if (menu) menu.classList.add("hidden");
   };
 
+  useEffect(() => {
+    const addCloseButton = () => {
+      const closeButton = document.createElement("button");
+      closeButton.className =
+        "snipcart-close-button text-blue-500 hover:text-blue-700 transition flex items-center mt-4 md:hidden";
+      closeButton.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        <span>Continue Shopping</span>
+      `;
+
+      // Add click event to close the Snipcart modal
+      closeButton.addEventListener("click", () => {
+        if (window.Snipcart) {
+          window.Snipcart.api.modal.close();
+        }
+      });
+
+      // Add the button to the Snipcart cart footer
+      const observer = new MutationObserver(() => {
+        const cartFooter = document.querySelector(".snipcart-cart__footer");
+        if (cartFooter && !document.querySelector(".snipcart-close-button")) {
+          cartFooter.prepend(closeButton);
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+    };
+
+    document.addEventListener("snipcart.ready", addCloseButton);
+
+    return () => {
+      document.removeEventListener("snipcart.ready", addCloseButton);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="bg-black text-white w-screen sticky top-0 z-50">
-        <nav className="px-6 py-4 flex items-center justify-between">
+        <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo Section */}
           <Link href="/" className="flex items-center">
             <img
@@ -225,6 +263,7 @@ const Layout = ({ children }) => {
               href="/merch"
               className="text-lg md:text-sm lg:text-lg text-white hover:text-blue-400 transition"
               onClick={closeMobileMenu}
+              prefetch={true}
             >
               Merch
             </Link>
@@ -393,6 +432,7 @@ const Layout = ({ children }) => {
             <Link
               href="/merch"
               className="text-sm text-white hover:text-blue-400 transition"
+              prefetch={true}
             >
               Merch
             </Link>
