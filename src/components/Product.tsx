@@ -33,6 +33,17 @@ const Product = (product) => {
 
   const addToWishlist = () => addItem(product);
 
+  const productUrl = `/api/products/${activeVariantExternalId}`;
+
+  // Console log the Snipcart attributes
+  console.log("Snipcart Attributes:");
+  console.log("data-item-id:", activeVariantExternalId);
+  console.log("data-item-name:", name);
+  console.log("data-item-price:", activeVariant.retail_price);
+  console.log("data-item-url:", productUrl);
+  console.log("data-item-description:", activeVariant.name);
+  console.log("data-item-image:", activeVariantFile.preview_url);
+
   const onWishlist = isSaved(id);
 
   return (
@@ -92,7 +103,7 @@ const Product = (product) => {
           className="snipcart-add-item w-full md:w-auto transition flex-shrink-0 py-2 px-4 border border-gray-300 hover:border-transparent shadow-sm text-sm font-medium bg-white text-gray-900 focus:text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:outline-none rounded"
           data-item-id={activeVariantExternalId}
           data-item-price={activeVariant.retail_price}
-          data-item-url={`/api/products/${activeVariantExternalId}`}
+          data-item-url={productUrl}
           data-item-description={activeVariant.name}
           data-item-image={activeVariantFile.preview_url}
           data-item-name={name}
