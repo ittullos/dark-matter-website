@@ -2,6 +2,7 @@ import React from "react";
 import Hero from "../components/Hero";
 import SoundCloudPlaylistPlayer from "../components/SoundCloudPlaylistPlayer";
 import SoundCloudPlayer from "../components/SoundCloudPlayer";
+import Image from "next/image";
 
 const Music = () => {
   return (
@@ -19,11 +20,14 @@ const Music = () => {
         {/* Brainwash EP Section */}
         <div className="mt-8 text-center">
           {/* Album Artwork */}
-          <img
-            src="/brainwash.jpg" // Replace with the actual path to your album artwork
-            alt="Brainwash EP Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/brainwash.jpg"
+              alt="Brainwash EP Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             Brainwash EP (DirtySnatcha Records)
@@ -37,11 +41,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlaylistPlayer
@@ -54,11 +61,14 @@ const Music = () => {
         {/* DSR Brainwash Mini Mix Section */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/brainwash_mix.jpg" // Replace with the actual path to your album artwork
-            alt="DSR Brainwash Mini Mix Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/brainwash_mix.jpg"
+              alt="DSR Brainwash Mini Mix Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             DSR Brainwash Mini Mix
@@ -74,11 +84,14 @@ const Music = () => {
         {/* Darkness Section */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/darkness.jpg" // Replace with the actual path to your album artwork
-            alt="Darkness Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/darkness.jpg"
+              alt="Darkness Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             DARK MATTER - Darkness
@@ -92,11 +105,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -109,11 +125,14 @@ const Music = () => {
         {/* Venom Flip */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/venom.jpg" // Replace with the actual path to your album artwork
-            alt="Venom Flip Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/venom.jpg"
+              alt="Venom Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             GHOSTEMANE - VENOM (DARK MATTER FLIP)
@@ -129,14 +148,17 @@ const Music = () => {
         {/* Brain Tickler Flip */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/brain_tickler.jpg" // Replace with the actual path to your album artwork
-            alt="Brain Tickler Remix Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/brain_tickler.jpg"
+              alt="Brain Tickler Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
-            GHOSTEMANE - VENOM (DARK MATTER FLIP)
+            AHEE - Brain Tickler (DARK MATTER Remix)
           </h2>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -149,11 +171,14 @@ const Music = () => {
         {/* Where You At Section */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/wya.jpg" // Replace with the actual path to your album artwork
-            alt="Darkness Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/wya.jpg"
+              alt="Where you at Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             Flux Pavilion X Conrank - Where You At (DARK MATTER Remix)
@@ -167,11 +192,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -184,11 +212,14 @@ const Music = () => {
         {/* Snakes Bootleg */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/snakes.jpg" // Replace with the actual path to your album artwork
-            alt="Snakes Bootleg Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/snakes.jpg"
+              alt="Snakes Bootleg Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             DISTINCT MOTIVE - SNAKES (DARK MATTER BOOTLEG)
@@ -204,11 +235,14 @@ const Music = () => {
         {/* Spaghetti Remix Section */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/noetspag.jpg" // Replace with the actual path to your album artwork
-            alt="Noetika Spaghetti Remix Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/noetspag.jpg"
+              alt="Spaghetti Remix Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             Noetika - Spaghetti (DARK MATTER Remix)
@@ -222,11 +256,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -239,11 +276,14 @@ const Music = () => {
         {/* Spaghettified Section */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/spag.jpg" // Replace with the actual path to your album artwork
-            alt="Spaghettified Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/spag.jpg"
+              alt="Spaghettified Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             DARK MATTER - Spaghettified
@@ -257,11 +297,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -274,11 +317,14 @@ const Music = () => {
         {/* EVIL Section */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/evil.jpg" // Replace with the actual path to your album artwork
-            alt="EVIL Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/evil.jpg"
+              alt="EVIL Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             DARK MATTER - EVIL (MAKE WAVS)
@@ -292,11 +338,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -309,11 +358,14 @@ const Music = () => {
         {/* Gunslinger Flip */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/gunslinger.jpg" // Replace with the actual path to your album artwork
-            alt="Snakes Bootleg Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/gunslinger.jpg"
+              alt="Gunslinger Remix Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             Liquid Stranger - Gunslinger (DARK MATTER Flip)
@@ -329,11 +381,14 @@ const Music = () => {
         {/* Action Time */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/actiontime.jpg" // Replace with the actual path to your album artwork
-            alt="Action Time Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/actiontime.jpg"
+              alt="Action Time Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             DARK MATTER & Short CRKT - Action Time
@@ -347,11 +402,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -364,11 +422,14 @@ const Music = () => {
         {/* How We Do It */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/how.jpg" // Replace with the actual path to your album artwork
-            alt="Action Time Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/how.jpg"
+              alt="How We Do It Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             DARK MATTER - How We Do It
@@ -382,11 +443,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -399,11 +463,14 @@ const Music = () => {
         {/* P.U.T.T. */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/putt.jpg" // Replace with the actual path to your album artwork
-            alt="Action Time Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/putt.jpg"
+              alt="P.U.T.T. Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             DARK MATTER - P.U.T.T.
@@ -417,11 +484,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -434,11 +504,14 @@ const Music = () => {
         {/* Big Boi */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/bigboi.jpg" // Replace with the actual path to your album artwork
-            alt="Big Boi Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/bigboi.jpg"
+              alt="Big Boi Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             DARK MATTER - P.U.T.T.
@@ -452,11 +525,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -469,11 +545,14 @@ const Music = () => {
         {/* BZ boi */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/bz_boi.jpg" // Replace with the actual path to your album artwork
-            alt="BZ boi Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/bz_boi.jpg"
+              alt="BZ boi Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">DARK MATTER - BZ boi</h2>
           {/* Stream Link */}
@@ -485,11 +564,14 @@ const Music = () => {
           >
             Stream
             {/* Spotify Logo */}
-            <img
-              src="/spotify-icon.png" // Replace with the actual path to your Spotify logo
-              alt="Spotify"
-              className="w-6 h-6 ml-2" // Adjust size as needed
-            />
+            <div className="w-6 h-6 ml-2">
+              <Image
+                src="/spotify-icon.png"
+                alt="Spotify"
+                width={24}
+                height={24}
+              />
+            </div>
           </a>
           {/* SoundCloud Player */}
           <SoundCloudPlayer
@@ -502,11 +584,14 @@ const Music = () => {
         {/* Like That Flip */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/like.jpg" // Replace with the actual path to your album artwork
-            alt="Snakes Bootleg Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/like.jpg"
+              alt="Like That Flip Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             PEEKABOO & LYNY - Like That (DARK MATTER Flip)
@@ -522,11 +607,14 @@ const Music = () => {
         {/* Feel Alive Flip */}
         <div className="mt-12 text-center">
           {/* Album Artwork */}
-          <img
-            src="/alive.jpg" // Replace with the actual path to your album artwork
-            alt="Feel Alive Artwork"
-            className="w-full max-w-xs mx-auto rounded-lg shadow-lg mb-6" // Reduced size to max-w-sm
-          />
+          <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg overflow-hidden mb-8">
+            <Image
+              src="/alive.jpg"
+              alt="Feel Alive Flip Artwork"
+              width={400}
+              height={400}
+            />
+          </div>
           {/* Title */}
           <h2 className="text-2xl font-semibold mb-4">
             Stylust- Feel Alive (DARK MATTER Flip)

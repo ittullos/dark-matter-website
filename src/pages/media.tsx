@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Hero from "../components/Hero";
 import path from "path";
 import fs from "fs";
+import Image from "next/image"; // Import the Image component from next/image
 
 type MediaProps = {
   images: string[];
@@ -75,10 +76,14 @@ const Media: React.FC<MediaProps> = ({ images }) => {
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-              <img
+              <Image
                 src={images[selectedImageIndex]}
                 alt="Selected"
-                className="w-full h-full object-cover rounded-lg shadow-lg"
+                layout="responsive" // Use "responsive" instead of "fill" for better control
+                width={1600} // Match the aspect ratio (16:9)
+                height={900} // Match the aspect ratio (16:9)
+                objectFit="cover" // Ensures the image covers the container
+                className="rounded-lg shadow-lg"
               />
 
               {/* Left Arrow */}

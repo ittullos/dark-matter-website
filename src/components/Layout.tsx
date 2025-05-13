@@ -57,7 +57,7 @@ const Layout = ({ children }) => {
       <header className="bg-black text-white w-screen sticky top-0 z-50">
         <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo Section */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center" passHref>
             <img
               src="/logo.png"
               alt="Logo"
@@ -100,6 +100,7 @@ const Layout = ({ children }) => {
               href="/"
               className="flex items-center md:hidden"
               onClick={closeMobileMenu}
+              passHref
             >
               <img
                 src="/logo.png"
@@ -218,6 +219,7 @@ const Layout = ({ children }) => {
                 href="/wishlist"
                 className="relative text-white hover:text-blue-400 transition"
                 onClick={closeMobileMenu}
+                passHref
               >
                 {hasItems && (
                   <span className="absolute bg-red-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
@@ -312,6 +314,7 @@ const Layout = ({ children }) => {
             <Link
               href="/wishlist"
               className="relative text-white hover:text-blue-400 transition"
+              passHref
             >
               {hasItems && (
                 <span className="absolute bg-red-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
@@ -354,7 +357,7 @@ const Layout = ({ children }) => {
       <footer className="bg-black text-white py-8">
         <div className="max-w-6xl mx-auto px-6 flex flex-col items-center">
           {/* Logo Section */}
-          <Link href="/" className="flex items-center mb-4 md:mb-0">
+          <Link href="/" className="flex items-center mb-4 md:mb-0" passHref>
             <img
               src="/logo.png"
               alt="Logo"

@@ -2,6 +2,7 @@ import * as React from "react";
 import HeroCarousel from "../components/HeroCarousel";
 import SoundCloudPlayer from "../components/SoundCloudPlayer";
 import SoundCloudPlaylistPlayer from "../components/SoundCloudPlaylistPlayer";
+import Image from "next/image"; // Import the Image component
 
 const IndexPage = () => {
   const images = [
@@ -30,11 +31,15 @@ const IndexPage = () => {
         <div className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-12">
           {/* Image */}
           <div className="flex-shrink-0">
-            <img
-              src="/dark-matter-about.jpg"
-              alt="DARK MATTER"
-              className="w-full h-auto max-w-lg object-cover rounded-lg shadow-lg"
-            />
+            <div className="w-full h-auto max-w-lg relative">
+              <Image
+                src="/dark-matter-about.jpg"
+                alt="DARK MATTER"
+                width={800} // Adjust width to match the original display
+                height={600} // Adjust height to match the original display
+                className="object-cover rounded-lg shadow-lg"
+              />
+            </div>
           </div>
 
           {/* Bio */}
@@ -46,13 +51,13 @@ const IndexPage = () => {
             <p className="text-lg text-white leading-relaxed mb-4">
               DARK MATTER launched their project at the beginning of 2024,
               starting off strong by winning the Circus Records remix contest
-              for Flux Pavilion and Conrank’s track “Where You At.” Since then,
-              they've been relentless in their pursuit of sonic innovation,
+              for Flux Pavilion and Conrank&rsquo;s track &ldquo;Where You At.&ldquo; Since then,
+              they&apos;ve been relentless in their pursuit of sonic innovation,
               consistently delivering boundary-pushing tracks that defy
               categorization.
             </p>
             <p className="text-lg text-white leading-relaxed mb-4">
-              Recently, DARK MATTER released their single "Brainwash" on
+              Recently, DARK MATTER released their single &quot;Brainwash&quot; on
               DirtySnatcha Records, which was played out by Liquid Stranger at
               Cyclops Cove 3. They also made their festival debut at Radiance
               NYE in Chicago, opening for Rezz, Peekaboo, and Truth.
