@@ -5,3 +5,4 @@ module.exports = {
     domains: ["files.cdn.printful.com"],
   },
 };
+
