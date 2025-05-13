@@ -51,15 +51,15 @@ const IndexPage = () => {
             <p className="text-lg text-white leading-relaxed mb-4">
               DARK MATTER launched their project at the beginning of 2024,
               starting off strong by winning the Circus Records remix contest
-              for Flux Pavilion and Conrank&rsquo;s track &ldquo;Where You At.&ldquo; Since then,
-              they&apos;ve been relentless in their pursuit of sonic innovation,
-              consistently delivering boundary-pushing tracks that defy
-              categorization.
+              for Flux Pavilion and Conrank&rsquo;s track &ldquo;Where You
+              At.&ldquo; Since then, they&apos;ve been relentless in their
+              pursuit of sonic innovation, consistently delivering
+              boundary-pushing tracks that defy categorization.
             </p>
             <p className="text-lg text-white leading-relaxed mb-4">
-              Recently, DARK MATTER released their single &quot;Brainwash&quot; on
-              DirtySnatcha Records, which was played out by Liquid Stranger at
-              Cyclops Cove 3. They also made their festival debut at Radiance
+              Recently, DARK MATTER released their single &quot;Brainwash&quot;
+              on DirtySnatcha Records, which was played out by Liquid Stranger
+              at Cyclops Cove 3. They also made their festival debut at Radiance
               NYE in Chicago, opening for Rezz, Peekaboo, and Truth.
             </p>
             <p className="text-lg text-white leading-relaxed">
