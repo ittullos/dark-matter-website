@@ -52,10 +52,4 @@ coverage/
 # TypeScript
 *.tsbuildinfo
 
-# Exclude image files
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.svg
-*.webp
+.DS_Store

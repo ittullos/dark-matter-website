@@ -2,6 +2,7 @@ import * as React from "react";
 import HeroCarousel from "../components/HeroCarousel";
 import SoundCloudPlayer from "../components/SoundCloudPlayer";
 import SoundCloudPlaylistPlayer from "../components/SoundCloudPlaylistPlayer";
+import Image from "next/image"; // Import the Image component
 
 const IndexPage = () => {
   const images = [
@@ -30,11 +31,15 @@ const IndexPage = () => {
         <div className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-12">
           {/* Image */}
           <div className="flex-shrink-0">
-            <img
-              src="/dark-matter-about.jpg"
-              alt="DARK MATTER"
-              className="w-full h-auto max-w-lg object-cover rounded-lg shadow-lg"
-            />
+            <div className="w-full h-auto max-w-lg relative">
+              <Image
+                src="/dark-matter-about.jpg"
+                alt="DARK MATTER"
+                width={800} // Adjust width to match the original display
+                height={600} // Adjust height to match the original display
+                className="object-cover rounded-lg shadow-lg"
+              />
+            </div>
           </div>
 
           {/* Bio */}
