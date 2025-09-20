@@ -1,6 +1,6 @@
 const description =
   "Discover DARK MATTER, an EDM producer duo specializing in Dubstep. Explore our music, mentoring programs, exclusive sample packs, and merch for sale. Join the DARK MATTER experience today!";
-const title = "DARK MATTER - EDM Producer Duo";
+const title = "DARK MATTER";
 const url = "https://darkmatterbassmusic.com";
 
 const seo = {
