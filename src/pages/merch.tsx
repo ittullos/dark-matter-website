@@ -40,50 +40,79 @@ const Merch: React.FC<MerchPageProps> = ({ products }) => {
       <p className="text-lg text-gray-400 mb-6">
         Browse and purchase our exclusive merchandise.
       </p>
-      <ProductGrid products={products} />
+      {products.length > 0 ? (
+        <ProductGrid products={products} />
+      ) : (
+        <div className="text-center py-12">
+          <p className="text-gray-500 text-lg">
+            Products are currently being loaded. Please check back soon!
+          </p>
+        </div>
+      )}
     </div>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { result: productIds } = await printful.get("sync/products");
+  // Check if API key exists
+  if (!process.env.PRINTFUL_API_KEY) {
+    console.warn("PRINTFUL_API_KEY not found, returning empty products");
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
 
-  const allProducts = await Promise.all(
-    productIds.map(async ({ id }) => await printful.get(`sync/products/${id}`))
-  );
+  try {
+    const { result: productIds } = await printful.get("sync/products");
 
-  const products: PrintfulProduct[] = allProducts.map(
-    ({ result: { sync_product, sync_variants } }) => {
-      console.log(
-        "Raw sync_variants for",
-        sync_product.name,
-        ":",
-        sync_variants
-      );
+    const allProducts = await Promise.all(
+      productIds.map(async ({ id }) => await printful.get(`sync/products/${id}`))
+    );
 
-      const formattedVariants = sync_variants.map(({ name, ...variant }) => {
-        const formattedName = formatVariantName(name);
+    const products: PrintfulProduct[] = allProducts.map(
+      ({ result: { sync_product, sync_variants } }) => {
         console.log(
-          `Original variant name: "${name}" -> Formatted: "${formattedName}"`
+          "Raw sync_variants for",
+          sync_product.name,
+          ":",
+          sync_variants
         );
+
+        const formattedVariants = sync_variants.map(({ name, ...variant }) => {
+          const formattedName = formatVariantName(name);
+          console.log(
+            `Original variant name: "${name}" -> Formatted: "${formattedName}"`
+          );
+          return {
+            name: formattedName,
+            ...variant,
+          };
+        });
+
         return {
-          name: formattedName,
-          ...variant,
+          ...sync_product,
+          variants: formattedVariants,
         };
-      });
+      }
+    );
 
-      return {
-        ...sync_product,
-        variants: formattedVariants,
-      };
-    }
-  );
-
-  return {
-    props: {
-      products: shuffle(products),
-    },
-  };
+    return {
+      props: {
+        products: shuffle(products),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching products from Printful:", error);
+    
+    // Return empty products instead of crashing the build
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
 };
 
 export default Merch;
