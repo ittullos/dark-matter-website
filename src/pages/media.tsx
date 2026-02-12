@@ -71,7 +71,7 @@ const Media: React.FC<MediaProps> = ({ images }) => {
           <div className="relative flex flex-col items-center">
             {/* Main Image */}
             <div
-              className="w-full max-w-4xl mb-6 relative aspect-w-16 aspect-h-9"
+              className="w-full max-w-4xl mb-6 relative"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
@@ -79,11 +79,10 @@ const Media: React.FC<MediaProps> = ({ images }) => {
               <Image
                 src={images[selectedImageIndex]}
                 alt="Selected"
-                layout="responsive" // Use "responsive" instead of "fill" for better control
-                width={1600} // Match the aspect ratio (16:9)
-                height={900} // Match the aspect ratio (16:9)
-                objectFit="cover" // Ensures the image covers the container
-                className="rounded-lg shadow-lg"
+                width={1600}
+                height={900}
+                style={{ objectFit: "cover" }}
+                className="rounded-lg shadow-lg w-full h-auto"
               />
 
               {/* Left Arrow */}

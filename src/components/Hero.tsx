@@ -25,8 +25,8 @@ const Hero: React.FC<HeroProps> = ({
       <Image
         src={imageSrc}
         alt={imageAlt}
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
         className="opacity-60" // Darken the background image
       />
     </div>

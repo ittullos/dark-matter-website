@@ -53,13 +53,30 @@ export const getStaticProps: GetStaticProps = async () => {
   );
 
   const products: PrintfulProduct[] = allProducts.map(
-    ({ result: { sync_product, sync_variants } }) => ({
-      ...sync_product,
-      variants: sync_variants.map(({ name, ...variant }) => ({
-        name: formatVariantName(name),
-        ...variant,
-      })),
-    })
+    ({ result: { sync_product, sync_variants } }) => {
+      console.log(
+        "Raw sync_variants for",
+        sync_product.name,
+        ":",
+        sync_variants
+      );
+
+      const formattedVariants = sync_variants.map(({ name, ...variant }) => {
+        const formattedName = formatVariantName(name);
+        console.log(
+          `Original variant name: "${name}" -> Formatted: "${formattedName}"`
+        );
+        return {
+          name: formattedName,
+          ...variant,
+        };
+      });
+
+      return {
+        ...sync_product,
+        variants: formattedVariants,
+      };
+    }
   );
 
   return {

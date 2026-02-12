@@ -35,8 +35,8 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ images, logoSrc }) => {
         <Image
           src={images[currentIndex].src}
           alt={images[currentIndex].alt}
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           className="transition-opacity duration-500"
         />
         {/* Dark Tint Overlay */}
