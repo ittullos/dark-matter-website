@@ -16,6 +16,7 @@ export const musicData: MusicItem[] = [
     image: "/awakening.jpg",
     soundcloudUrl:
       "https://soundcloud.com/wakaan/sets/dark-matter-awakening-ep",
+    streamUrl: "https://hypeddit.com/darkmatter/awakeningep",
   },
   {
     id: "brainwash-ep",
@@ -32,6 +33,7 @@ export const musicData: MusicItem[] = [
     title: "Supersonic",
     image: "/supersonic.jpg",
     soundcloudUrl: "https://soundcloud.com/dirtysnatcharecords/supersonic",
+    streamUrl: "https://hypeddit.com/darkmatter/dirtysnatchacarbinsupersonicdarkmatterremix",
   },
   {
     id: "in-the-shadows",
@@ -39,6 +41,7 @@ export const musicData: MusicItem[] = [
     title: "In The Shadows v3",
     image: "/shadows.jpg",
     soundcloudUrl: "https://soundcloud.com/earth-hz/in-the-shadows-v3",
+    streamUrl: "https://hypeddit.com/darkmatter/intheshadows",
   },
   // All other songs with Bang at the top
   {
@@ -47,6 +50,7 @@ export const musicData: MusicItem[] = [
     title: "Bang",
     image: "/bang.jpg",
     soundcloudUrl: "https://soundcloud.com/noetika/bang",
+    streamUrl: "https://hypeddit.com/noetikadarkmatter/bangg",
   },
   {
     id: "dsr-brainwash-mini-mix",
