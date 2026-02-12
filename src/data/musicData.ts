@@ -39,7 +39,7 @@ export const musicData: MusicItem[] = [
   {
     id: "in-the-shadows",
     type: "single",
-    title: "In The Shadows v3",
+    title: "In The Shadows",
     image: "/shadows.jpg",
     soundcloudUrl: "https://soundcloud.com/earth-hz/in-the-shadows-v3",
     streamUrl: "https://hypeddit.com/darkmatter/intheshadows",

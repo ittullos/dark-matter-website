@@ -9,7 +9,7 @@ interface MusicItemProps {
 
 const MusicItem: React.FC<MusicItemProps> = ({ item }) => {
   return (
-    <>
+    <div id={item.id}>
       {item.type === "playlist" ? (
         <Playlist item={item} />
       ) : (
@@ -17,7 +17,7 @@ const MusicItem: React.FC<MusicItemProps> = ({ item }) => {
       )}
       {/* Spacer */}
       <div className="mt-12" style={{ height: "20px" }}></div>
-    </>
+    </div>
   );
 };
 
