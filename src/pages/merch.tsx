@@ -40,7 +40,7 @@ const Merch: React.FC<MerchPageProps> = ({ products }) => {
       <p className="text-lg text-gray-400 mb-6">
         Browse and purchase our exclusive merchandise.
       </p>
-      {products.length > 0 ? (
+      {products && products.length > 0 ? (
         <ProductGrid products={products} />
       ) : (
         <div className="text-center py-12">
@@ -68,7 +68,9 @@ export const getStaticProps: GetStaticProps = async () => {
     const { result: productIds } = await printful.get("sync/products");
 
     const allProducts = await Promise.all(
-      productIds.map(async ({ id }) => await printful.get(`sync/products/${id}`))
+      productIds.map(
+        async ({ id }) => await printful.get(`sync/products/${id}`)
+      )
     );
 
     const products: PrintfulProduct[] = allProducts.map(
@@ -105,7 +107,7 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   } catch (error) {
     console.error("Error fetching products from Printful:", error);
-    
+
     // Return empty products instead of crashing the build
     return {
       props: {
