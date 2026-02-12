@@ -33,7 +33,8 @@ export const musicData: MusicItem[] = [
     title: "Supersonic",
     image: "/supersonic.jpg",
     soundcloudUrl: "https://soundcloud.com/dirtysnatcharecords/supersonic",
-    streamUrl: "https://hypeddit.com/darkmatter/dirtysnatchacarbinsupersonicdarkmatterremix",
+    streamUrl:
+      "https://hypeddit.com/darkmatter/dirtysnatchacarbinsupersonicdarkmatterremix",
   },
   {
     id: "in-the-shadows",
