@@ -50,19 +50,42 @@ const IndexPage = () => {
               Music Producer Duo
             </h3>
             {artistBio.paragraphs.map((paragraph, index) => (
-              <p key={index} className="text-lg text-white leading-relaxed mb-4">
+              <p
+                key={index}
+                className="text-lg text-white leading-relaxed mb-4"
+              >
                 {paragraph}
               </p>
             ))}
-            <p className="text-lg text-white leading-relaxed mt-4">
-              <strong>Contact:</strong>{" "}
-              <a
-                href={`mailto:${artistBio.contact.email}`}
-                className="text-blue-400 hover:underline"
-              >
-                {artistBio.contact.email}
-              </a>
-            </p>
+            <div className="text-lg text-white leading-relaxed mt-4 space-y-2">
+              <p>
+                <strong>Contact:</strong>{" "}
+                <a
+                  href={`mailto:${artistBio.contact.email}`}
+                  className="text-blue-400 hover:underline"
+                >
+                  {artistBio.contact.email}
+                </a>
+              </p>
+              <p>
+                <strong>Bookings:</strong>{" "}
+                <a
+                  href={`mailto:${artistBio.contact.bookings}`}
+                  className="text-blue-400 hover:underline"
+                >
+                  {artistBio.contact.bookings}
+                </a>
+              </p>
+              <p>
+                <strong>Management:</strong>{" "}
+                <a
+                  href={`mailto:${artistBio.contact.management}`}
+                  className="text-blue-400 hover:underline"
+                >
+                  {artistBio.contact.management}
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </section>
