@@ -133,25 +133,27 @@ const Media: React.FC<MediaProps> = ({ images }) => {
 };
 
 export const getStaticProps = async () => {
-  const imagesDirectory = path.join(process.cwd(), "public", "RADIANCE_WEB");
+  // Option 1: Use Cloudinary URLs (recommended)
+  // Replace with your actual Cloudinary URLs after uploading
+  const cloudinaryImages = [
+    // "https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/radiance/image1.jpg",
+    // "https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/radiance/image2.jpg",
+    // Add all your images here
+  ];
 
-  // Check if the directory exists
-  if (!fs.existsSync(imagesDirectory)) {
-    console.warn("RADIANCE_WEB folder does not exist.");
-    return {
-      props: {
-        images: [],
-      },
-    };
+  // Option 2: Fallback to local images (for now)
+  const imagesDirectory = path.join(process.cwd(), "public", "RADIANCE_WEB");
+  let localImages: string[] = [];
+
+  if (fs.existsSync(imagesDirectory)) {
+    const imageFiles = fs.readdirSync(imagesDirectory);
+    localImages = imageFiles
+      .filter((file) => /\.(jpg|jpeg|png|gif)$/i.test(file))
+      .map((file) => `/RADIANCE_WEB/${file}`);
   }
 
-  // Read files from the directory
-  const imageFiles = fs.readdirSync(imagesDirectory);
-
-  // Filter only image files (e.g., .jpg, .png, .jpeg)
-  const images = imageFiles
-    .filter((file) => /\.(jpg|jpeg|png|gif)$/i.test(file))
-    .map((file) => `/RADIANCE_WEB/${file}`);
+  // Use Cloudinary images if available, otherwise fallback to local
+  const images = cloudinaryImages.length > 0 ? cloudinaryImages : localImages;
 
   return {
     props: {
