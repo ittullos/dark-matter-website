@@ -3,6 +3,7 @@ import HeroCarousel from "../components/HeroCarousel";
 import SoundCloudPlayer from "../components/SoundCloudPlayer";
 import SoundCloudPlaylistPlayer from "../components/SoundCloudPlaylistPlayer";
 import Image from "next/image"; // Import the Image component
+import { artistBio } from "../data/bio"; // Import the bio data
 
 const IndexPage = () => {
   const images = [
@@ -48,32 +49,18 @@ const IndexPage = () => {
               <span className="font-extrabold text-white">DARK MATTER</span> -
               Music Producer Duo
             </h3>
-            <p className="text-lg text-white leading-relaxed mb-4">
-              DARK MATTER launched their project at the beginning of 2024,
-              starting off strong by winning the Circus Records remix contest
-              for Flux Pavilion and Conrank&rsquo;s track &ldquo;Where You
-              At.&ldquo; Since then, they&apos;ve been relentless in their
-              pursuit of sonic innovation, consistently delivering
-              boundary-pushing tracks that defy categorization.
-            </p>
-            <p className="text-lg text-white leading-relaxed mb-4">
-              Recently, DARK MATTER released their single &quot;Brainwash&quot;
-              on DirtySnatcha Records, which was played out by Liquid Stranger
-              at Cyclops Cove 3. They also made their festival debut at Radiance
-              NYE in Chicago, opening for Rezz, Peekaboo, and Truth.
-            </p>
-            <p className="text-lg text-white leading-relaxed">
-              DARK MATTER invites you to experience music in its rawest, most
-              unfiltered form as they venture deeper into the uncharted abyss of
-              sound.
-            </p>
+            {artistBio.paragraphs.map((paragraph, index) => (
+              <p key={index} className="text-lg text-white leading-relaxed mb-4">
+                {paragraph}
+              </p>
+            ))}
             <p className="text-lg text-white leading-relaxed mt-4">
               <strong>Contact:</strong>{" "}
               <a
-                href="mailto:darkmatterbassmusic@gmail.com"
+                href={`mailto:${artistBio.contact.email}`}
                 className="text-blue-400 hover:underline"
               >
-                darkmatterbassmusic@gmail.com
+                {artistBio.contact.email}
               </a>
             </p>
           </div>

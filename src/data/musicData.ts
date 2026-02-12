@@ -12,7 +12,7 @@ export const musicData: MusicItem[] = [
   {
     id: "awakening-ep",
     type: "playlist",
-    title: "Awakening EP",
+    title: "Awakening EP [WAKAAN]",
     image: "/awakening.jpg",
     soundcloudUrl:
       "https://soundcloud.com/wakaan/sets/dark-matter-awakening-ep",
@@ -21,7 +21,7 @@ export const musicData: MusicItem[] = [
   {
     id: "brainwash-ep",
     type: "playlist",
-    title: "Brainwash EP",
+    title: "Brainwash EP [DSR]",
     image: "/brainwash.jpg",
     soundcloudUrl:
       "https://soundcloud.com/dirtysnatcharecords/sets/darkmatter-brainwashep",
@@ -30,7 +30,7 @@ export const musicData: MusicItem[] = [
   {
     id: "supersonic",
     type: "single",
-    title: "Supersonic",
+    title: "DirtySnatcha & Carbin - Supersonic (Dark Matter Remix)",
     image: "/supersonic.jpg",
     soundcloudUrl: "https://soundcloud.com/dirtysnatcharecords/supersonic",
     streamUrl:
@@ -39,7 +39,7 @@ export const musicData: MusicItem[] = [
   {
     id: "in-the-shadows",
     type: "single",
-    title: "In The Shadows",
+    title: "In The Shadows [earth hz]",
     image: "/shadows.jpg",
     soundcloudUrl: "https://soundcloud.com/earth-hz/in-the-shadows-v3",
     streamUrl: "https://hypeddit.com/darkmatter/intheshadows",
