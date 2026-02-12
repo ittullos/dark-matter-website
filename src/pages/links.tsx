@@ -549,7 +549,7 @@ const LinksPage = () => {
                         Radiance NYE
                       </h3>
                       <p className="text-gray-200 text-sm drop-shadow-md">
-                        New Year's Event
+                        New Year&apos;s Event
                       </p>
                     </div>
                   </div>
