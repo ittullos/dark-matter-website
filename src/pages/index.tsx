@@ -95,10 +95,13 @@ const IndexPage = () => {
         <h2 className="text-5xl font-extrabold mb-8 mt-4 text-white text-center">
           Music
         </h2>
-        <SoundCloudPlaylistPlayer
-          playlistUrl="https://soundcloud.com/darkmatterbassmusic/sets/dark-matter-releases-1"
-          height={500}
-        />
+        <div className="w-full max-w-2xl mx-auto">
+          <SoundCloudPlaylistPlayer
+            playlistUrl="https://soundcloud.com/darkmatterbassmusic/sets/dark-matter-releases-1"
+            height={500}
+            width="100%"
+          />
+        </div>
 
         {/* Follow Us on Spotify Button */}
         <div className="mt-8 text-center">
