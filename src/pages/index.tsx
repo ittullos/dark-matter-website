@@ -57,7 +57,7 @@ const IndexPage = () => {
                 {paragraph}
               </p>
             ))}
-            <div className="text-lg text-white leading-relaxed mt-4 space-y-2">
+            <div className="text-sm sm:text-base lg:text-lg text-white leading-relaxed mt-4 space-y-2">
               <p>
                 <strong>Contact:</strong>{" "}
                 <a
