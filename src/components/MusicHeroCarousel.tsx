@@ -30,7 +30,7 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
   };
 
   return (
-    <div className="relative w-full h-[70vh] sm:h-[75vh] lg:h-[60vh] overflow-hidden">
+    <div className="relative w-full h-screen sm:h-screen lg:h-[60vh] overflow-hidden">
       {items.map((item, index) => (
         <div
           key={item.id}
@@ -54,9 +54,9 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
           {/* Content Layer */}
           <div className="relative z-10 h-full flex flex-col justify-center text-white px-4 sm:px-6">
             {/* MUSIC Banner - Responsive positioning and sizing */}
-            <div className="absolute top-12 sm:top-6 lg:top-8 left-1/2 transform -translate-x-1/2">
+            <div className="absolute top-20 sm:top-20 lg:top-8 left-1/2 transform -translate-x-1/2">
               <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-wider"
+                className="text-6xl sm:text-7xl lg:text-7xl font-bold tracking-wider"
                 style={{
                   textShadow: "4px 4px 8px rgba(0, 0, 0, 1)",
                 }}
