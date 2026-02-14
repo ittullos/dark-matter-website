@@ -30,7 +30,7 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
   };
 
   return (
-    <div className="relative w-full h-[60vh] overflow-hidden">
+    <div className="relative w-full h-[50vh] sm:h-[55vh] lg:h-[60vh] overflow-hidden">
       {items.map((item, index) => (
         <div
           key={item.id}
@@ -45,18 +45,18 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
               alt={`${item.title} Background`}
               fill
               style={{ objectFit: "cover" }}
-              className="scale-150 blur-md"
+              className="scale-125 sm:scale-150 blur-md"
             />
             {/* Dark overlay for text readability */}
-            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+            <div className="absolute inset-0 bg-black bg-opacity-60 sm:bg-opacity-50"></div>
           </div>
 
           {/* Content Layer */}
-          <div className="relative z-10 h-full flex flex-col justify-center text-white px-6">
-            {/* MUSIC Banner - Centered at top */}
-            <div className="absolute top-8 left-1/2 transform -translate-x-1/2">
+          <div className="relative z-10 h-full flex flex-col justify-center text-white px-4 sm:px-6">
+            {/* MUSIC Banner - Responsive positioning and sizing */}
+            <div className="absolute top-4 sm:top-6 lg:top-8 left-1/2 transform -translate-x-1/2">
               <h1
-                className="text-6xl font-bold tracking-wider"
+                className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-wider"
                 style={{
                   textShadow: "4px 4px 8px rgba(0, 0, 0, 1)",
                 }}
@@ -66,16 +66,16 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
             </div>
 
             {/* Album Cover and Text Section */}
-            <div className="flex items-center justify-center max-w-6xl mx-auto w-full">
+            <div className="flex items-center justify-center max-w-6xl mx-auto w-full px-2">
               <div
-                className={`flex items-center gap-10 ${
-                  index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                className={`flex flex-col lg:flex-row items-center gap-4 sm:gap-6 lg:gap-10 ${
+                  index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 }`}
               >
                 {/* Album Cover */}
                 <div className="flex-shrink-0">
                   <div
-                    className="w-80 h-80 rounded-lg shadow-2xl overflow-hidden cursor-pointer transition-transform hover:scale-105"
+                    className="w-40 h-40 sm:w-52 sm:h-52 lg:w-80 lg:h-80 rounded-lg shadow-2xl overflow-hidden cursor-pointer transition-transform hover:scale-105"
                     onClick={() => {
                       // Scroll to the corresponding section on the music page
                       const targetElement = document.getElementById(item.id);
@@ -98,9 +98,9 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
                 </div>
 
                 {/* Title and Stream Button Box */}
-                <div className="text-center">
+                <div className="text-center max-w-xs sm:max-w-sm lg:max-w-none">
                   <h2
-                    className="text-5xl font-bold mb-8 leading-tight"
+                    className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight"
                     style={{
                       textShadow: "4px 4px 8px rgba(0, 0, 0, 1)",
                     }}
@@ -113,12 +113,12 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
                       href={item.streamUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center bg-blue-500 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300 text-xl"
+                      className="inline-flex items-center bg-blue-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 lg:py-4 lg:px-8 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300 text-sm sm:text-lg lg:text-xl"
                     >
                       Stream Now
                       {/* Speaker Icon */}
                       <svg
-                        className="w-6 h-6 ml-3"
+                        className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 ml-2 lg:ml-3"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -141,10 +141,10 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-black bg-opacity-50 text-white p-2 sm:p-3 rounded-full hover:bg-opacity-70 transition"
       >
         <svg
-          className="w-6 h-6"
+          className="w-5 h-5 sm:w-6 sm:h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -160,10 +160,10 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-black bg-opacity-50 text-white p-2 sm:p-3 rounded-full hover:bg-opacity-70 transition"
       >
         <svg
-          className="w-6 h-6"
+          className="w-5 h-5 sm:w-6 sm:h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -178,12 +178,12 @@ const MusicHeroCarousel: React.FC<MusicHeroCarouselProps> = ({ items }) => {
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-2">
+      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-2">
         {items.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition ${
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition ${
               index === currentSlide ? "bg-white" : "bg-white bg-opacity-50"
             }`}
           />
