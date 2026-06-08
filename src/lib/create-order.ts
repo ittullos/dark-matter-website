@@ -23,12 +23,16 @@ const createOrder = async ({
     email,
   };
 
-  const printfulItems: PrintfulShippingItem[] = items.map(
-    (item): PrintfulShippingItem => ({
-      external_variant_id: item.id,
-      quantity: item.quantity,
-    })
-  );
+  const printfulItems: PrintfulShippingItem[] = items
+    .filter((item) => !isNaN(Number(item.id)))
+    .map(
+      (item): PrintfulShippingItem => ({
+        external_variant_id: item.id,
+        quantity: item.quantity,
+      })
+    );
+
+  if (printfulItems.length === 0) return null;
 
   const { result } = await printful.post("orders", {
     external_id: invoiceNumber,
