@@ -1,0 +1,121 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Lets you run `npx decap-server` locally and test the CMS UI against your
+# local filesystem without needing Netlify Identity set up yet.
+local_backend: true
+
+media_folder: "public/uploads/links"
+public_folder: "/uploads/links"
+
+collections:
+  - name: "links"
+    label: "Links"
+    label_singular: "Link"
+    folder: "content/links"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} — {{section}}{{#if featured}} ⭐ featured{{/if}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - {
+          label: "Subtitle",
+          name: "subtitle",
+          widget: "string",
+          required: false,
+          hint: "Small line under the title, e.g. \"Latest Single • 2025\"",
+        }
+      - { label: "URL", name: "url", widget: "string", hint: "Where this link should send people." }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - {
+          label: "Section",
+          name: "section",
+          widget: "select",
+          options: ["release", "social"],
+          default: "release",
+          hint: "\"Social\" links use the Social Icon field below instead of an image.",
+        }
+      - {
+          label: "Featured",
+          name: "featured",
+          widget: "boolean",
+          default: false,
+          hint: "Only mark 1-2 items featured at a time — these get the big highlighted card at the top of the page. Everything else shows as a compact row.",
+        }
+      - {
+          label: "Social Icon",
+          name: "icon",
+          widget: "select",
+          options: ["instagram", "facebook", "spotify", "soundcloud"],
+          required: false,
+          hint: "Only used when Section is \"social\".",
+        }
+      - {
+          label: "Order",
+          name: "order",
+          widget: "number",
+          default: 1,
+          hint: "Controls display order — lower numbers show first.",
+        }
+      - {
+          label: "Published",
+          name: "published",
+          widget: "boolean",
+          default: true,
+          hint: "Turn off to hide this link without deleting it.",
+        }
+
+  - name: "events"
+    label: "Events"
+    label_singular: "Event"
+    folder: "content/events"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+      - { label: "URL", name: "url", widget: "string" }
+      - {
+          label: "Image",
+          name: "image",
+          widget: "image",
+          required: false,
+          hint: "Optional — events without an image use a placeholder icon.",
+        }
+      - {
+          label: "Order",
+          name: "order",
+          widget: "number",
+          default: 1,
+          hint: "Controls display order — lower numbers show first.",
+        }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "general"
+        label: "Profile & Socials"
+        file: "content/settings.json"
+        fields:
+          - { label: "Profile Photo", name: "profileImage", widget: "image" }
+          - { label: "Logo", name: "logo", widget: "image" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - label: "Social Links"
+            name: "socialLinks"
+            widget: "list"
+            summary: "{{platform}}"
+            fields:
+              - {
+                  label: "Platform",
+                  name: "platform",
+                  widget: "select",
+                  options: ["instagram", "facebook", "spotify", "soundcloud"],
+                }
+              - { label: "URL", name: "url", widget: "string" }

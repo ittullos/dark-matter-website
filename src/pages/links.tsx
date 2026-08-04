@@ -1,8 +1,38 @@
 import * as React from "react";
 import Image from "next/image";
 import Head from "next/head";
+import fs from "fs";
+import path from "path";
+import { GetStaticProps } from "next";
 
-const LinksPage = () => {
+import LinkCard from "../components/links/LinkCard";
+import SocialIconRow from "../components/links/SocialIconRow";
+import { LinkEntry, EventEntry, SiteSettings } from "../types";
+
+interface LinksPageProps {
+  links: LinkEntry[];
+  events: EventEntry[];
+  settings: SiteSettings;
+}
+
+const readJsonDir = <T,>(dirPath: string): T[] => {
+  if (!fs.existsSync(dirPath)) return [];
+
+  return fs
+    .readdirSync(dirPath)
+    .filter((file) => file.endsWith(".json"))
+    .map((file) => ({
+      ...JSON.parse(fs.readFileSync(path.join(dirPath, file), "utf8")),
+      // Filename is the canonical slug (Decap CMS names files from the entry
+      // slug) — derive it rather than trusting a hand-edited field.
+      slug: path.basename(file, ".json"),
+    }));
+};
+
+const LinksPage = ({ links, events, settings }: LinksPageProps) => {
+  const featuredLinks = links.filter((link) => link.featured);
+  const standardLinks = links.filter((link) => !link.featured);
+
   return (
     <>
       <Head>
@@ -15,623 +45,95 @@ const LinksPage = () => {
 
       <div className="min-h-screen bg-black text-white">
         {/* Hero Section */}
-        <section className="relative py-20 px-6">
+        <section className="relative pt-16 pb-10 px-6">
           <div className="max-w-lg mx-auto text-center">
             {/* Profile Image */}
-            <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg">
+            <div className="relative w-28 h-28 mx-auto mb-5 rounded-full overflow-hidden border-4 border-white/90 shadow-lg shadow-white/5">
               <Image
-                src="/dark-matter-about.jpg"
+                src={settings.profileImage}
                 alt="DARK MATTER"
                 fill
+                priority
                 className="object-cover"
               />
             </div>
 
             {/* Logo instead of text */}
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-center mb-3">
               <img
-                src="/logo.png"
+                src={settings.logo}
                 alt="DARK MATTER"
-                className="h-16 w-auto max-w-full object-contain"
+                className="h-14 w-auto max-w-full object-contain"
               />
             </div>
 
             {/* Tagline */}
-            <p className="text-xl text-gray-300 mb-6">Welcome to the Void</p>
+            <p className="text-lg text-gray-300 mb-6">{settings.tagline}</p>
 
-            {/* Social Media Links - Bigger and closer */}
-            <div className="flex justify-center space-x-6 mb-8">
-              {/* Instagram */}
-              <a
-                href="https://www.instagram.com/darkmatterbassmusic/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="hover:opacity-75 transition p-2"
-              >
-                <img
-                  src="/instagram-white-icon.png"
-                  alt="Instagram"
-                  className="h-10 w-10"
-                />
-              </a>
-
-              {/* Facebook */}
-              <a
-                href="https://www.facebook.com/darkmatterbassmusic"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="hover:opacity-75 transition p-2"
-              >
-                <img
-                  src="/facebook-app-round-white-icon.png"
-                  alt="Facebook"
-                  className="h-10 w-10"
-                />
-              </a>
-
-              {/* Spotify */}
-              <a
-                href="https://open.spotify.com/artist/71c783dJDlJ3pqD7cFIOQq?si=r1kWgk6GR5urDLEAUk65GQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Spotify"
-                className="hover:opacity-75 transition p-2"
-              >
-                <img
-                  src="/spotify-icon.png"
-                  alt="Spotify"
-                  className="h-10 w-10"
-                />
-              </a>
-
-              {/* SoundCloud */}
-              <a
-                href="https://soundcloud.com/darkmatterbassmusic"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="SoundCloud"
-                className="hover:opacity-75 transition p-2"
-              >
-                <img
-                  src="/soundcloud-white-icon.png"
-                  alt="SoundCloud"
-                  className="h-10 w-10"
-                />
-              </a>
-            </div>
+            {/* Social Media Links */}
+            <SocialIconRow links={settings.socialLinks} size="lg" />
           </div>
         </section>
 
         {/* Links Section */}
         <section className="max-w-lg mx-auto px-6 pb-12">
-          <div className="space-y-4">
-            {/* Latest Release - Darkness */}
-            <a
-              href="https://open.spotify.com/track/6Yz32ZCnqyYO8rdx3AcKW9?si=6598d373b67e4390"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-            >
-              <div className="relative h-36 bg-gray-900/50">
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-40">
-                  <Image
-                    src="/darkness.jpg"
-                    alt="Darkness"
-                    fill
-                    className="object-cover blur-sm"
-                  />
-                </div>
+          <div className="space-y-3">
+            {featuredLinks.map((link) => (
+              <LinkCard
+                key={link.slug}
+                title={link.title}
+                subtitle={link.subtitle}
+                url={link.url}
+                image={link.image}
+                featured
+              />
+            ))}
+            {standardLinks.map((link) => (
+              <LinkCard
+                key={link.slug}
+                title={link.title}
+                subtitle={link.subtitle}
+                url={link.url}
+                image={link.image}
+              />
+            ))}
+          </div>
 
-                {/* Glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3">
-                    <Image
-                      src="/darkness.jpg"
-                      alt="Darkness"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                      Darkness
-                    </h3>
-                    <p className="text-gray-200 text-sm drop-shadow-md">
-                      Latest Single • 2025
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* Brainwash EP */}
-            <a
-              href="https://hypeddit.com/brainwashep"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-            >
-              <div className="relative h-36 bg-gray-900/50">
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-40">
-                  <Image
-                    src="/brainwash.jpg"
-                    alt="Brainwash EP"
-                    fill
-                    className="object-cover blur-sm"
-                  />
-                </div>
-
-                {/* Glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3">
-                    <Image
-                      src="/brainwash.jpg"
-                      alt="Brainwash EP"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                      Brainwash EP
-                    </h3>
-                    <p className="text-gray-200 text-sm drop-shadow-md">
-                      Stream Now
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* How We Do It */}
-            <a
-              href="https://open.spotify.com/album/7CWeBbDTYEpzDXxTffuns7?si=ZVifmnG8R0ONXrouhXdHNA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-            >
-              <div className="relative h-36 bg-gray-900/50">
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-40">
-                  <Image
-                    src="/how.jpg"
-                    alt="How We Do It"
-                    fill
-                    className="object-cover blur-sm"
-                  />
-                </div>
-
-                {/* Glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3">
-                    <Image
-                      src="/how.jpg"
-                      alt="How We Do It"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                      How We Do It
-                    </h3>
-                    <p className="text-gray-200 text-sm drop-shadow-md">
-                      Song • 2024
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* BZ boi */}
-            <a
-              href="https://open.spotify.com/album/6c1Os1rIdrTnULIQpKUsya?si=q0FWaQqQQo-CD1J2iCl84w"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-            >
-              <div className="relative h-36 bg-gray-900/50">
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-40">
-                  <Image
-                    src="/bz_boi.jpg"
-                    alt="BZ boi"
-                    fill
-                    className="object-cover blur-sm"
-                  />
-                </div>
-
-                {/* Glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3">
-                    <Image
-                      src="/bz_boi.jpg"
-                      alt="BZ boi"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                      BZ boi
-                    </h3>
-                    <p className="text-gray-200 text-sm drop-shadow-md">
-                      Single • 2024
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* Band4Band Flip */}
-            <a
-              href="https://soundcloud.com/darkmatterbassmusic/central-cee-lil-baby-band4band-dark-matter-flip"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-            >
-              <div className="relative h-36 bg-gray-900/50">
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-40">
-                  <Image
-                    src="/spag.jpg"
-                    alt="Band4Band Flip"
-                    fill
-                    className="object-cover blur-sm"
-                  />
-                </div>
-
-                {/* Glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3">
-                    <Image
-                      src="/spag.jpg"
-                      alt="Band4Band Flip"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                      Band4Band (DARK MATTER FLIP)
-                    </h3>
-                    <p className="text-gray-200 text-sm drop-shadow-md">
-                      Central Cee, Lil Baby
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* GHOSTEMANE Flip */}
-            <a
-              href="https://soundcloud.com/darkmatterbassmusic/ghostmane-venom-dark-matter"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-            >
-              <div className="relative h-36 bg-gray-900/50">
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-40">
-                  <Image
-                    src="/venom.jpg"
-                    alt="VENOM FLIP"
-                    fill
-                    className="object-cover blur-sm"
-                  />
-                </div>
-
-                {/* Glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3">
-                    <Image
-                      src="/venom.jpg"
-                      alt="VENOM FLIP"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                      VENOM (DARK MATTER FLIP)
-                    </h3>
-                    <p className="text-gray-200 text-sm drop-shadow-md">
-                      GHOSTEMANE
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* Apple Music Playlist */}
-            <a
-              href="https://music.apple.com/us/playlist/dark-matters-chicago-il-2024-concert-set-list/pl.a31f14b366dd47c3bcd28b2e935d24d4?ls=&at=1000l3bbu&itscg=30200&itsct=music_box_link&app=music"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-            >
-              <div className="relative h-36 bg-gray-900/50">
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-40">
-                  <Image
-                    src="/apple_music.png"
-                    alt="Apple Music"
-                    fill
-                    className="object-cover blur-sm"
-                  />
-                </div>
-
-                {/* Glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3">
-                    <Image
-                      src="/apple_music.png"
-                      alt="Apple Music"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                      Chicago 2024 Concert Set List
-                    </h3>
-                    <p className="text-gray-200 text-sm drop-shadow-md">
-                      Apple Music Playlist
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* Liquid Stranger Flip */}
-            <a
-              href="https://soundcloud.com/darkmatterbassmusic/liquid-stranger-gunslinger-dark-matter-flip"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-            >
-              <div className="relative h-36 bg-gray-900/50">
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-40">
-                  <Image
-                    src="/gunslinger.jpg"
-                    alt="Gunslinger Flip"
-                    fill
-                    className="object-cover blur-sm"
-                  />
-                </div>
-
-                {/* Glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3">
-                    <Image
-                      src="/gunslinger.jpg"
-                      alt="Gunslinger Flip"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                      Gunslinger (DARK MATTER Flip)
-                    </h3>
-                    <p className="text-gray-200 text-sm drop-shadow-md">
-                      Liquid Stranger
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* Stylust Flip */}
-            <a
-              href="https://soundcloud.com/darkmatterbassmusic/stylust-feel-alive-dark-matter-flip"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-            >
-              <div className="relative h-36 bg-gray-900/50">
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-40">
-                  <Image
-                    src="/alive.jpg"
-                    alt="Feel Alive Flip"
-                    fill
-                    className="object-cover blur-sm"
-                  />
-                </div>
-
-                {/* Glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3">
-                    <Image
-                      src="/alive.jpg"
-                      alt="Feel Alive Flip"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                      Feel Alive (DARK MATTER Flip)
-                    </h3>
-                    <p className="text-gray-200 text-sm drop-shadow-md">
-                      Stylust
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            {/* Tour/Events Section */}
+          {/* Tour/Events Section */}
+          {events.length > 0 && (
             <div className="border-t border-gray-700/50 pt-6 mt-8">
-              <h2 className="text-2xl font-bold text-center mb-6">
+              <h2 className="text-xl font-bold text-center mb-5">
                 Upcoming Events
               </h2>
-
-              {/* Synesthesia Festival */}
-              <a
-                href="https://www.stupidhappycollective.com/event-details/synesthesia-music-and-arts-festival-2025-1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10 mb-4"
-              >
-                <div className="relative h-36 bg-gray-900/50">
-                  {/* Glossy overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                  {/* Content */}
-                  <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                    <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3 bg-gray-900 flex items-center justify-center">
-                      <span className="text-xl font-bold">🎪</span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                        Synesthesia Festival 2025
-                      </h3>
-                      <p className="text-gray-200 text-sm drop-shadow-md">
-                        Music & Arts Festival
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </a>
-
-              {/* Radiance NYE */}
-              <a
-                href="https://www.nyeradiance.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block w-full rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg border border-white/10"
-              >
-                <div className="relative h-36 bg-gray-900/50">
-                  {/* Glossy overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
-
-                  {/* Content */}
-                  <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-                    <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-white/30 shadow-lg mb-3 bg-gray-900 flex items-center justify-center">
-                      <span className="text-xl font-bold">🎆</span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-xl text-white drop-shadow-lg mb-1">
-                        Radiance NYE
-                      </h3>
-                      <p className="text-gray-200 text-sm drop-shadow-md">
-                        New Year&apos;s Event
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </a>
+              <div className="space-y-3">
+                {events.map((event) => (
+                  <LinkCard
+                    key={event.slug}
+                    title={event.title}
+                    subtitle={event.subtitle}
+                    url={event.url}
+                    image={event.image}
+                    fallbackEmoji="🎪"
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </section>
 
         {/* Footer */}
         <footer className="bg-black text-white py-8 border-t border-gray-800">
           <div className="max-w-6xl mx-auto px-6 flex flex-col items-center">
-            {/* Logo Section */}
             <div className="flex items-center mb-4">
               <img
-                src="/logo.png"
+                src={settings.logo}
                 alt="Logo"
                 className="h-12 w-auto max-w-full object-contain"
               />
             </div>
 
-            {/* Social Media Icons */}
-            <div className="flex space-x-4 mb-6">
-              {/* Instagram */}
-              <a
-                href="https://www.instagram.com/darkmatterbassmusic/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="hover:opacity-75 transition"
-              >
-                <img
-                  src="/instagram-white-icon.png"
-                  alt="Instagram"
-                  className="h-6 w-6"
-                />
-              </a>
-
-              {/* Facebook */}
-              <a
-                href="https://www.facebook.com/darkmatterbassmusic"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="hover:opacity-75 transition"
-              >
-                <img
-                  src="/facebook-app-round-white-icon.png"
-                  alt="Facebook"
-                  className="h-6 w-6"
-                />
-              </a>
-
-              {/* Spotify */}
-              <a
-                href="https://open.spotify.com/artist/71c783dJDlJ3pqD7cFIOQq?si=r1kWgk6GR5urDLEAUk65GQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Spotify"
-                className="hover:opacity-75 transition"
-              >
-                <img
-                  src="/spotify-icon.png"
-                  alt="Spotify"
-                  className="h-6 w-6"
-                />
-              </a>
-
-              {/* SoundCloud */}
-              <a
-                href="https://soundcloud.com/darkmatterbassmusic"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="SoundCloud"
-                className="hover:opacity-75 transition"
-              >
-                <img
-                  src="/soundcloud-white-icon.png"
-                  alt="SoundCloud"
-                  className="h-6 w-6"
-                />
-              </a>
+            <div className="mb-6">
+              <SocialIconRow links={settings.socialLinks} size="sm" />
             </div>
 
             <div className="text-center text-sm text-gray-400">
@@ -643,6 +145,31 @@ const LinksPage = () => {
       </div>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps<LinksPageProps> = async () => {
+  const contentDir = path.join(process.cwd(), "content");
+
+  const links = readJsonDir<LinkEntry>(path.join(contentDir, "links"))
+    .filter((link) => link.published)
+    .sort((a, b) => a.order - b.order);
+
+  const events = readJsonDir<EventEntry>(path.join(contentDir, "events"))
+    .filter((event) => event.published)
+    .sort((a, b) => a.order - b.order);
+
+  const settingsPath = path.join(contentDir, "settings.json");
+  const settings: SiteSettings = JSON.parse(
+    fs.readFileSync(settingsPath, "utf8")
+  );
+
+  return {
+    props: {
+      links,
+      events,
+      settings,
+    },
+  };
 };
 
 export default LinksPage;

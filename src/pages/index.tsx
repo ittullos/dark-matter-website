@@ -3,6 +3,7 @@ import HeroCarousel from "../components/HeroCarousel";
 import SoundCloudPlayer from "../components/SoundCloudPlayer";
 import SoundCloudPlaylistPlayer from "../components/SoundCloudPlaylistPlayer";
 import Image from "next/image"; // Import the Image component
+import Script from "next/script";
 import { artistBio } from "../data/bio"; // Import the bio data
 
 const IndexPage = () => {
@@ -19,6 +20,24 @@ const IndexPage = () => {
 
   return (
     <div className="w-full">
+      {/* Netlify Identity only needs to live on the page invite/recovery
+          emails redirect back to — keeps the widget off every other route. */}
+      <Script
+        src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", (user: unknown) => {
+              if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                  document.location.href = "/admin/";
+                });
+              }
+            });
+          }
+        }}
+      />
+
       <HeroCarousel images={images} logoSrc="/dm-logo-hero.png" />
 
       {/* About Section */}

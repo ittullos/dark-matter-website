@@ -85,23 +85,44 @@
 
 - [ ] Confirm the production build completes without errors (check Netlify deploy logs)
 - [ ] Confirm `PRINTFUL_API_KEY` is available at **build time** — it is used in `getStaticProps` on the merch page and must be set before the build runs, not just at runtime
-- [ ] Confirm Next.js API routes are working on Netlify (`@netlify/plugin-nextjs` or Next.js Runtime v5)
-- [ ] If API routes return 404 in production, add a `netlify.toml` to the project root
+- [x] Confirm Next.js API routes are working on Netlify (`@netlify/plugin-nextjs` or Next.js Runtime v5) — **done**, `@netlify/plugin-nextjs` added as a dev dependency and wired up in `netlify.toml`
+- [x] Add a `netlify.toml` to the project root — **done**
 
 ---
 
 ## 9. Content & Pages
 
-- [ ] Review all pages for placeholder or test content
-- [ ] Confirm all images load correctly in production
-- [ ] Check mobile responsiveness on a real device
-- [ ] Verify all navigation links work
-- [ ] Confirm `favicon.ico` is present in `/public`
-- [ ] Review `terms-of-sale` page for accuracy
+- [x] Review all pages for placeholder or test content — **done**. Found and fixed two real issues left over from the original boilerplate:
+  - `/about` was an orphaned, unlinked page still showing "You're viewing the Headless Dropshipping Starter by Jamie Barton" — deleted (the homepage already has a real DARK MATTER bio section)
+  - `/terms-of-sale` had three `[insert your support email here]` placeholders — replaced with `darkmatterbassmusic@gmail.com` and linked it from the site footer so it's actually reachable
+- [x] Confirm all images load correctly in production — spot-checked every page in dev; all local and Printful-hosted images render
+- [ ] Check mobile responsiveness on a real device — spot-checked at emulated mobile widths (390px) in Chrome DevTools, nav + `/links` hold up well, but still worth a pass on an actual phone before go-live
+- [x] Verify all navigation links work — **done**, clicked through every top-nav route (Music, Merch, Tour, Media, Producer Shop) plus mobile menu, wishlist, and the new `/terms-of-sale` footer link, no broken links or console errors
+- [x] Confirm `favicon.ico` is present in `/public` — **done**, present
+- [x] Review `terms-of-sale` page for accuracy — **done**, see above
+
+**Also found during this sweep, not blocking launch but worth knowing about:**
+- `/tour`'s Bandsintown feed is currently returning zero events, while `/links` lists two upcoming shows (Synesthesia Festival 2025, Radiance NYE) — worth double-checking those events are actually on Bandsintown so the two pages don't contradict each other.
+- A handful of debug `console.log` calls remain in Printful/Snipcart API routes (`src/pages/api/products/[id].ts`, `src/pages/merch.tsx`, `src/components/BandsintownTour.tsx`, plus generic `console.log(error)` catch blocks) — left alone intentionally since they sit inside checkout-critical code that should only change alongside the checkout testing in section 5, not as an incidental cleanup.
+- `npm audit` currently reports 21 vulnerabilities (6 moderate, 13 high, 2 critical), mostly from older pinned dependencies (`next-auth@4`, `eslint@8`, `tailwindcss@3`, etc.) — worth a dependency review pass post-launch; not something to `--force` fix blind before going live.
 
 ---
 
-## 10. Analytics & Monitoring *(Nice to Have)*
+## 10. Links Page & Content Admin (Decap CMS)
+
+The `/links` page (Linktree/Beacons replacement) is now backed by a git-based CMS instead of hardcoded content, so you and your partner can add/remove/reorder links yourselves without touching code.
+
+- [x] Content model + redesign shipped — `content/links/*.json`, `content/events/*.json`, `content/settings.json`, rendered via `src/pages/links.tsx`
+- [x] Admin UI added at `/admin` (Decap CMS, `public/admin/`)
+- [ ] In Netlify dashboard: **Site settings → Identity**, click **Enable Identity**
+- [ ] Set registration to **Invite only** (Identity → Registration)
+- [ ] Enable **Git Gateway** (Identity → Services → Git Gateway)
+- [ ] Invite both band members' emails (Identity → Invite users)
+- [ ] Smoke test: log into `yourdomain.com/admin`, edit one link, confirm a real commit lands on `main` and the rebuilt site reflects the change
+
+---
+
+## 11. Analytics & Monitoring *(Nice to Have)*
 
 - [ ] Add Google Analytics or Plausible if desired
 - [ ] Set up Netlify email alerts for failed deploys

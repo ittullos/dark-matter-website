@@ -3,6 +3,7 @@ import type { NextApiRequest } from "next";
 declare global {
   interface Window {
     Snipcart: any;
+    netlifyIdentity: any;
   }
   namespace JSX {
     interface IntrinsicElements {
@@ -99,3 +100,40 @@ export type PrintfulShippingItem = {
   external_variant_id: string;
   quantity: number;
 };
+
+export type SocialIconKey = "instagram" | "facebook" | "spotify" | "soundcloud";
+
+export interface LinkEntry {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  url: string;
+  image?: string;
+  section: "release" | "social";
+  featured: boolean;
+  icon?: SocialIconKey;
+  order: number;
+  published: boolean;
+}
+
+export interface EventEntry {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  url: string;
+  image?: string;
+  order: number;
+  published: boolean;
+}
+
+export interface SocialLink {
+  platform: SocialIconKey;
+  url: string;
+}
+
+export interface SiteSettings {
+  profileImage: string;
+  logo: string;
+  tagline: string;
+  socialLinks: SocialLink[];
+}

@@ -461,7 +461,10 @@ const Layout = ({ children }) => {
         </div>
         <div className="text-center mt-6 text-sm text-gray-400">
           &copy; {new Date().getFullYear()} DARK MATTER BASS MUSIC LLC. All
-          rights reserved.
+          rights reserved.{" "}
+          <Link href="/terms-of-sale" className="hover:text-blue-400 transition">
+            Terms of Sale
+          </Link>
         </div>
       </footer>
     </div>
