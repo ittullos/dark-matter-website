@@ -16,9 +16,11 @@ collections:
     folder: "content/links"
     create: true
     delete: true
+    extension: "json"
+    format: "json"
     slug: "{{slug}}"
     identifier_field: title
-    summary: "{{title}} — {{section}}{{#if featured}} ⭐ featured{{/if}}"
+    summary: "{{title}} — {{section}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - {
@@ -74,6 +76,8 @@ collections:
     folder: "content/events"
     create: true
     delete: true
+    extension: "json"
+    format: "json"
     slug: "{{slug}}"
     identifier_field: title
     summary: "{{title}}"
