@@ -49,14 +49,14 @@ See `LAUNCH_CHECKLIST.md` for the complete pre-launch checklist (domain, Snipcar
 
 1. Go to `yourdomain.com/admin`
 2. Log in (Netlify Identity — invite-only, set up per `LAUNCH_CHECKLIST.md` section 10)
-3. Add, edit, reorder, or hide links, events, and the profile/social settings
+3. Open **Links** or **Events** — each is a single list of every entry. Drag the ⠿ handle on the left of an item to reorder it (position in the list is what controls display order on the page), or add/delete/hide entries and Site Settings from the same screen.
 
-Content is stored as JSON files under `content/` (`content/links/`, `content/events/`, `content/settings.json`). Every edit made in `/admin` commits directly to `main` and triggers a Netlify rebuild — no database involved. The page code itself lives at `src/pages/links.tsx`, which reads that content at build time.
+Content is stored as JSON under `content/` (`content/links.json`, `content/events.json`, `content/settings.json`), each holding an ordered `items` array. Every edit made in `/admin` commits directly to `main` and triggers a Netlify rebuild — no database involved. The page code itself lives at `src/pages/links.tsx`, which reads that content at build time.
 
 ### Links content fields
 
-- **Links** — `title`, `subtitle`, `url`, `image`, `section` (`release`/`social`), `icon` (for socials), `order` (controls display position — sort the list by "Order" in `/admin` to see/edit the current sequence), `published`
-- **Events** — `title`, `subtitle`, `url`, `image` (optional — falls back to a placeholder icon), `order`, `published`
+- **Links** — `title`, `subtitle`, `url`, `image`, `section` (`release`/`social`), `icon` (for socials), `published`. Display order is just the item's position in the list — drag to reorder.
+- **Events** — `title`, `subtitle`, `url`, `image` (optional — falls back to a placeholder icon), `published`. Same drag-to-reorder behavior.
 - **Settings** — profile photo, logo, tagline, and the social icon row (shown in both the hero and footer)
 
 ## Setting up Printful & Snipcart

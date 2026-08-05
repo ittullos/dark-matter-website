@@ -15,18 +15,11 @@ interface LinksPageProps {
   settings: SiteSettings;
 }
 
-const readJsonDir = <T,>(dirPath: string): T[] => {
-  if (!fs.existsSync(dirPath)) return [];
+const readJsonItems = <T,>(filePath: string): T[] => {
+  if (!fs.existsSync(filePath)) return [];
 
-  return fs
-    .readdirSync(dirPath)
-    .filter((file) => file.endsWith(".json"))
-    .map((file) => ({
-      ...JSON.parse(fs.readFileSync(path.join(dirPath, file), "utf8")),
-      // Filename is the canonical slug (Decap CMS names files from the entry
-      // slug) — derive it rather than trusting a hand-edited field.
-      slug: path.basename(file, ".json"),
-    }));
+  const { items } = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  return items ?? [];
 };
 
 const LinksPage = ({ links, events, settings }: LinksPageProps) => {
@@ -77,7 +70,7 @@ const LinksPage = ({ links, events, settings }: LinksPageProps) => {
           <div className="space-y-3">
             {links.map((link, index) => (
               <LinkCard
-                key={link.slug}
+                key={`${index}-${link.title}`}
                 title={link.title}
                 subtitle={link.subtitle}
                 url={link.url}
@@ -94,9 +87,9 @@ const LinksPage = ({ links, events, settings }: LinksPageProps) => {
                 Upcoming Events
               </h2>
               <div className="space-y-3">
-                {events.map((event) => (
+                {events.map((event, index) => (
                   <LinkCard
-                    key={event.slug}
+                    key={`${index}-${event.title}`}
                     title={event.title}
                     subtitle={event.subtitle}
                     url={event.url}
@@ -138,13 +131,13 @@ const LinksPage = ({ links, events, settings }: LinksPageProps) => {
 export const getStaticProps: GetStaticProps<LinksPageProps> = async () => {
   const contentDir = path.join(process.cwd(), "content");
 
-  const links = readJsonDir<LinkEntry>(path.join(contentDir, "links"))
-    .filter((link) => link.published)
-    .sort((a, b) => a.order - b.order);
+  const links = readJsonItems<LinkEntry>(
+    path.join(contentDir, "links.json")
+  ).filter((link) => link.published);
 
-  const events = readJsonDir<EventEntry>(path.join(contentDir, "events"))
-    .filter((event) => event.published)
-    .sort((a, b) => a.order - b.order);
+  const events = readJsonItems<EventEntry>(
+    path.join(contentDir, "events.json")
+  ).filter((event) => event.published);
 
   const settingsPath = path.join(contentDir, "settings.json");
   const settings: SiteSettings = JSON.parse(

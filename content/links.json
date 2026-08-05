@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "title": "Darkness",
+      "subtitle": "Latest Single • 2025",
+      "url": "https://open.spotify.com/track/6Yz32ZCnqyYO8rdx3AcKW9?si=6598d373b67e4390",
+      "image": "/darkness.jpg",
+      "section": "release",
+      "published": true
+    },
+    {
+      "title": "Brainwash EP",
+      "subtitle": "Stream Now",
+      "url": "https://hypeddit.com/brainwashep",
+      "image": "/brainwash.jpg",
+      "section": "release",
+      "published": true
+    },
+    {
+      "title": "How We Do It",
+      "subtitle": "Song • 2024",
+      "url": "https://open.spotify.com/album/7CWeBbDTYEpzDXxTffuns7?si=ZVifmnG8R0ONXrouhXdHNA",
+      "image": "/how.jpg",
+      "section": "release",
+      "published": true
+    },
+    {
+      "title": "BZ boi",
+      "subtitle": "Single • 2024",
+      "url": "https://open.spotify.com/album/6c1Os1rIdrTnULIQpKUsya?si=q0FWaQqQQo-CD1J2iCl84w",
+      "image": "/bz_boi.jpg",
+      "section": "release",
+      "published": true
+    },
+    {
+      "title": "Band4Band (DARK MATTER FLIP)",
+      "subtitle": "Central Cee, Lil Baby",
+      "url": "https://soundcloud.com/darkmatterbassmusic/central-cee-lil-baby-band4band-dark-matter-flip",
+      "image": "/spag.jpg",
+      "section": "release",
+      "published": true
+    },
+    {
+      "title": "VENOM (DARK MATTER FLIP)",
+      "subtitle": "GHOSTEMANE",
+      "url": "https://soundcloud.com/darkmatterbassmusic/ghostmane-venom-dark-matter",
+      "image": "/venom.jpg",
+      "section": "release",
+      "published": true
+    },
+    {
+      "title": "Chicago 2024 Concert Set List",
+      "subtitle": "Apple Music Playlist",
+      "url": "https://music.apple.com/us/playlist/dark-matters-chicago-il-2024-concert-set-list/pl.a31f14b366dd47c3bcd28b2e935d24d4?ls=&at=1000l3bbu&itscg=30200&itsct=music_box_link&app=music",
+      "image": "/apple_music.png",
+      "section": "release",
+      "published": true
+    },
+    {
+      "title": "Gunslinger (DARK MATTER Flip)",
+      "subtitle": "Liquid Stranger",
+      "url": "https://soundcloud.com/darkmatterbassmusic/liquid-stranger-gunslinger-dark-matter-flip",
+      "image": "/gunslinger.jpg",
+      "section": "release",
+      "published": true
+    },
+    {
+      "title": "Feel Alive (DARK MATTER Flip)",
+      "subtitle": "Stylust",
+      "url": "https://soundcloud.com/darkmatterbassmusic/stylust-feel-alive-dark-matter-flip",
+      "image": "/alive.jpg",
+      "section": "release",
+      "published": true
+    }
+  ]
+}

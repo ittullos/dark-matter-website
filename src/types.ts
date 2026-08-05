@@ -104,24 +104,20 @@ export type PrintfulShippingItem = {
 export type SocialIconKey = "instagram" | "facebook" | "spotify" | "soundcloud";
 
 export interface LinkEntry {
-  slug: string;
   title: string;
   subtitle?: string;
   url: string;
   image?: string;
   section: "release" | "social";
   icon?: SocialIconKey;
-  order: number;
   published: boolean;
 }
 
 export interface EventEntry {
-  slug: string;
   title: string;
   subtitle?: string;
   url: string;
   image?: string;
-  order: number;
   published: boolean;
 }
 

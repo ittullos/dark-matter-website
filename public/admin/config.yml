@@ -12,89 +12,75 @@ public_folder: "/uploads/links"
 collections:
   - name: "links"
     label: "Links"
-    label_singular: "Link"
-    folder: "content/links"
-    create: true
-    delete: true
-    extension: "json"
-    format: "json"
-    slug: "{{slug}}"
-    identifier_field: title
-    summary: "{{title}} — {{section}}"
-    sortable_fields: ["order", "title"]
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - {
-          label: "Subtitle",
-          name: "subtitle",
-          widget: "string",
-          required: false,
-          hint: "Small line under the title, e.g. \"Latest Single • 2025\"",
-        }
-      - { label: "URL", name: "url", widget: "string", hint: "Where this link should send people." }
-      - { label: "Image", name: "image", widget: "image", required: false }
-      - {
-          label: "Section",
-          name: "section",
-          widget: "select",
-          options: ["release", "social"],
-          default: "release",
-          hint: "\"Social\" links use the Social Icon field below instead of an image.",
-        }
-      - {
-          label: "Social Icon",
-          name: "icon",
-          widget: "select",
-          options: ["instagram", "facebook", "spotify", "soundcloud"],
-          required: false,
-          hint: "Only used when Section is \"social\".",
-        }
-      - {
-          label: "Order",
-          name: "order",
-          widget: "number",
-          default: 1,
-          hint: "Controls display order — lower numbers show first.",
-        }
-      - {
-          label: "Published",
-          name: "published",
-          widget: "boolean",
-          default: true,
-          hint: "Turn off to hide this link without deleting it.",
-        }
+    files:
+      - name: "items"
+        label: "Links"
+        file: "content/links.json"
+        fields:
+          - label: "Links"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            hint: "Drag the ⠿ handle on the left of an item to reorder it — position in this list is what controls display order on the page."
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - {
+                  label: "Subtitle",
+                  name: "subtitle",
+                  widget: "string",
+                  required: false,
+                  hint: "Small line under the title, e.g. \"Latest Single • 2025\"",
+                }
+              - { label: "URL", name: "url", widget: "string", hint: "Where this link should send people." }
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - {
+                  label: "Section",
+                  name: "section",
+                  widget: "select",
+                  options: ["release", "social"],
+                  default: "release",
+                  hint: "\"Social\" links use the Social Icon field below instead of an image.",
+                }
+              - {
+                  label: "Social Icon",
+                  name: "icon",
+                  widget: "select",
+                  options: ["instagram", "facebook", "spotify", "soundcloud"],
+                  required: false,
+                  hint: "Only used when Section is \"social\".",
+                }
+              - {
+                  label: "Published",
+                  name: "published",
+                  widget: "boolean",
+                  default: true,
+                  hint: "Turn off to hide this link without deleting it.",
+                }
 
   - name: "events"
     label: "Events"
-    label_singular: "Event"
-    folder: "content/events"
-    create: true
-    delete: true
-    extension: "json"
-    format: "json"
-    slug: "{{slug}}"
-    identifier_field: title
-    summary: "{{title}}"
-    sortable_fields: ["order", "title"]
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-      - { label: "URL", name: "url", widget: "string" }
-      - {
-          label: "Image",
-          name: "image",
-          widget: "image",
-          required: false,
-          hint: "Optional — events without an image use a placeholder icon.",
-        }
-      - {
-          label: "Order",
-          name: "order",
-          widget: "number",
-          default: 1,
-          hint: "Controls display order — lower numbers show first.",
-        }
-      - { label: "Published", name: "published", widget: "boolean", default: true }
+    files:
+      - name: "items"
+        label: "Events"
+        file: "content/events.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: "list"
+            summary: "{{title}}"
+            hint: "Drag the ⠿ handle on the left of an item to reorder it — position in this list is what controls display order on the page."
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+              - { label: "URL", name: "url", widget: "string" }
+              - {
+                  label: "Image",
+                  name: "image",
+                  widget: "image",
+                  required: false,
+                  hint: "Optional — events without an image use a placeholder icon.",
+                }
+              - { label: "Published", name: "published", widget: "boolean", default: true }
 
   - name: "settings"
     label: "Site Settings"

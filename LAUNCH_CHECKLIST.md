@@ -112,7 +112,7 @@
 
 The `/links` page (Linktree/Beacons replacement) is now backed by a git-based CMS instead of hardcoded content, so you and your partner can add/remove/reorder links yourselves without touching code.
 
-- [x] Content model + redesign shipped — `content/links/*.json`, `content/events/*.json`, `content/settings.json`, rendered via `src/pages/links.tsx`
+- [x] Content model + redesign shipped — `content/links.json`, `content/events.json`, `content/settings.json` (each an ordered list, drag-to-reorder in `/admin`), rendered via `src/pages/links.tsx`
 - [x] Admin UI added at `/admin` (Decap CMS, `public/admin/`)
 - [ ] In Netlify dashboard: **Site settings → Identity**, click **Enable Identity**
 - [ ] Set registration to **Invite only** (Identity → Registration)
