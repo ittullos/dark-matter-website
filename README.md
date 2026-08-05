@@ -55,7 +55,7 @@ Content is stored as JSON files under `content/` (`content/links/`, `content/eve
 
 ### Links content fields
 
-- **Links** — `title`, `subtitle`, `url`, `image`, `section` (`release`/`social`), `featured` (marks it as a large highlighted card instead of a compact row — keep this to 1–2 items at a time), `icon` (for socials), `order`, `published`
+- **Links** — `title`, `subtitle`, `url`, `image`, `section` (`release`/`social`), `icon` (for socials), `order` (controls display position — sort the list by "Order" in `/admin` to see/edit the current sequence), `published`
 - **Events** — `title`, `subtitle`, `url`, `image` (optional — falls back to a placeholder icon), `order`, `published`
 - **Settings** — profile photo, logo, tagline, and the social icon row (shown in both the hero and footer)
 

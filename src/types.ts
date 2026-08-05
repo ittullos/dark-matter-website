@@ -110,7 +110,6 @@ export interface LinkEntry {
   url: string;
   image?: string;
   section: "release" | "social";
-  featured: boolean;
   icon?: SocialIconKey;
   order: number;
   published: boolean;

@@ -30,9 +30,6 @@ const readJsonDir = <T,>(dirPath: string): T[] => {
 };
 
 const LinksPage = ({ links, events, settings }: LinksPageProps) => {
-  const featuredLinks = links.filter((link) => link.featured);
-  const standardLinks = links.filter((link) => !link.featured);
-
   return (
     <>
       <Head>
@@ -78,23 +75,14 @@ const LinksPage = ({ links, events, settings }: LinksPageProps) => {
         {/* Links Section */}
         <section className="max-w-lg mx-auto px-6 pb-12">
           <div className="space-y-3">
-            {featuredLinks.map((link) => (
+            {links.map((link, index) => (
               <LinkCard
                 key={link.slug}
                 title={link.title}
                 subtitle={link.subtitle}
                 url={link.url}
                 image={link.image}
-                featured
-              />
-            ))}
-            {standardLinks.map((link) => (
-              <LinkCard
-                key={link.slug}
-                title={link.title}
-                subtitle={link.subtitle}
-                url={link.url}
-                image={link.image}
+                priority={index === 0}
               />
             ))}
           </div>

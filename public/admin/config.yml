@@ -21,6 +21,7 @@ collections:
     slug: "{{slug}}"
     identifier_field: title
     summary: "{{title}} — {{section}}"
+    sortable_fields: ["order", "title"]
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - {
@@ -39,13 +40,6 @@ collections:
           options: ["release", "social"],
           default: "release",
           hint: "\"Social\" links use the Social Icon field below instead of an image.",
-        }
-      - {
-          label: "Featured",
-          name: "featured",
-          widget: "boolean",
-          default: false,
-          hint: "Only mark 1-2 items featured at a time — these get the big highlighted card at the top of the page. Everything else shows as a compact row.",
         }
       - {
           label: "Social Icon",
@@ -81,6 +75,7 @@ collections:
     slug: "{{slug}}"
     identifier_field: title
     summary: "{{title}}"
+    sortable_fields: ["order", "title"]
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
