@@ -1,18 +1,18 @@
 {
   "items": [
     {
-      "title": "Darkness",
-      "subtitle": "Latest Single • 2025",
-      "url": "https://open.spotify.com/track/6Yz32ZCnqyYO8rdx3AcKW9?si=6598d373b67e4390",
-      "image": "/darkness.jpg",
-      "section": "release",
-      "published": true
-    },
-    {
       "title": "Brainwash EP",
       "subtitle": "Stream Now",
       "url": "https://hypeddit.com/brainwashep",
       "image": "/brainwash.jpg",
+      "section": "release",
+      "published": true
+    },
+    {
+      "title": "Darkness",
+      "subtitle": "Latest Single • 2025",
+      "url": "https://open.spotify.com/track/6Yz32ZCnqyYO8rdx3AcKW9?si=6598d373b67e4390",
+      "image": "/darkness.jpg",
       "section": "release",
       "published": true
     },
