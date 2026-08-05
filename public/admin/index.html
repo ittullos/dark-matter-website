@@ -60,6 +60,83 @@
         });
       }
 
+      // Links, Events, and Site Settings are each a single-file collection,
+      // so the intermediate "list of one file" screen Decap shows when you
+      // click the collection in the sidebar is pure friction — skip straight
+      // to the entry editor instead.
+      (function () {
+        var skipToEntry = {
+          "#/collections/links": "#/collections/links/entries/all-links",
+          "#/collections/events": "#/collections/events/entries/all-events",
+          "#/collections/settings": "#/collections/settings/entries/general",
+        };
+
+        function redirect() {
+          var target = skipToEntry[window.location.hash];
+          if (target) {
+            window.location.replace(
+              window.location.pathname + window.location.search + target
+            );
+          }
+        }
+
+        window.addEventListener("hashchange", redirect);
+        window.addEventListener("load", redirect);
+
+        // Decap's own sidebar for switching between collections only shows
+        // on the list screen we're now skipping — without this, there'd be
+        // no way to get from "Links" to "Events" once redirected into an
+        // entry. Add a small persistent switcher instead.
+        function ensureQuickNav() {
+          if (document.getElementById("dm-quick-nav")) return;
+
+          var style = document.createElement("style");
+          style.textContent =
+            "#dm-quick-nav { position: fixed; top: 8px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; gap: 2px; background: #fff; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); font-family: -apple-system, BlinkMacSystemFont, sans-serif; }" +
+            "#dm-quick-nav a { padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #333; text-decoration: none; }" +
+            "#dm-quick-nav a:hover { background: #f0f0f0; }" +
+            "#dm-quick-nav a.active { background: #333; color: #fff; }";
+          document.head.appendChild(style);
+
+          var nav = document.createElement("div");
+          nav.id = "dm-quick-nav";
+          [
+            ["Links", "#/collections/links/entries/all-links"],
+            ["Events", "#/collections/events/entries/all-events"],
+            ["Site Settings", "#/collections/settings/entries/general"],
+          ].forEach(function (item) {
+            var a = document.createElement("a");
+            a.href = item[1];
+            a.textContent = item[0];
+            // A plain hash change leaves Decap's in-memory entry data
+            // stale when jumping between different collections (verified
+            // by testing — the form/preview keep showing the previous
+            // collection's data under the new collection's label). Force
+            // a full reload so it remounts fresh with the right data.
+            a.addEventListener("click", function (e) {
+              e.preventDefault();
+              window.location.hash = item[1].slice(1);
+              window.location.reload();
+            });
+            nav.appendChild(a);
+          });
+          document.body.appendChild(nav);
+        }
+
+        function highlightActive() {
+          var links = document.querySelectorAll("#dm-quick-nav a");
+          links.forEach(function (a) {
+            var isActive = window.location.hash.indexOf(a.getAttribute("href")) === 0;
+            a.classList.toggle("active", isActive);
+          });
+        }
+
+        window.addEventListener("hashchange", ensureQuickNav);
+        window.addEventListener("load", ensureQuickNav);
+        window.addEventListener("hashchange", highlightActive);
+        window.addEventListener("load", highlightActive);
+      })();
+
       // Custom previews so editing shows a compact, on-brand mockup instead
       // of Decap's default raw-field dump (which renders images full-size).
       var previewStyles = h(
