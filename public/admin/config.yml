@@ -6,6 +6,10 @@ backend:
 # local filesystem without needing Netlify Identity set up yet.
 local_backend: true
 
+logo_url: "/logo.png"
+site_url: "https://darkmatterbassmusic.com"
+display_url: "https://darkmatterbassmusic.com"
+
 media_folder: "public/uploads/links"
 public_folder: "/uploads/links"
 
@@ -13,7 +17,7 @@ collections:
   - name: "links"
     label: "Links"
     files:
-      - name: "items"
+      - name: "all-links"
         label: "Links"
         file: "content/links.json"
         fields:
@@ -60,7 +64,7 @@ collections:
   - name: "events"
     label: "Events"
     files:
-      - name: "items"
+      - name: "all-events"
         label: "Events"
         file: "content/events.json"
         fields:

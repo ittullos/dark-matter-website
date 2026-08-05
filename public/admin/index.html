@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DARK MATTER — Links Admin</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+
+      /* Bigger, clearer, left-of-title drag handle for reorderable lists.
+         Targets Decap's semantically-labeled (not just hashed) class names
+         — more stable than raw hashes, but still an internal implementation
+         detail that could shift on a future Decap version bump. */
+      [class*="SortableListItem"] {
+        position: relative !important;
+      }
+      [class*="NestedObjectLabel"] {
+        padding-left: 34px !important;
+      }
+      [class*="DragIconContainer"] {
+        position: absolute !important;
+        left: 4px !important;
+        top: 40px !important;
+        z-index: 2 !important;
+        width: 26px !important;
+        height: 26px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: grab !important;
+      }
+      [class*="DragIconContainer"] svg {
+        display: none !important;
+      }
+      [class*="DragIconContainer"]::after {
+        content: "" !important;
+        display: block !important;
+        width: 20px !important;
+        height: 20px !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='6' cy='4' r='1.7' fill='%23666'/%3E%3Ccircle cx='14' cy='4' r='1.7' fill='%23666'/%3E%3Ccircle cx='6' cy='10' r='1.7' fill='%23666'/%3E%3Ccircle cx='14' cy='10' r='1.7' fill='%23666'/%3E%3Ccircle cx='6' cy='16' r='1.7' fill='%23666'/%3E%3Ccircle cx='14' cy='16' r='1.7' fill='%23666'/%3E%3C/svg%3E") !important;
+      }
+    </style>
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
@@ -18,6 +59,149 @@
           }
         });
       }
+
+      // Custom previews so editing shows a compact, on-brand mockup instead
+      // of Decap's default raw-field dump (which renders images full-size).
+      var previewStyles = h(
+        "style",
+        {},
+        "\
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #0a0a0a; color: #fff; margin: 0; padding: 24px; }\
+          .dm-heading { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #777; margin: 0 0 14px; }\
+          .dm-card { display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 10px 14px; margin-bottom: 8px; background: rgba(255,255,255,0.03); }\
+          .dm-card.hidden { opacity: 0.4; }\
+          .dm-thumb, .dm-fallback { width: 52px; height: 52px; border-radius: 8px; flex-shrink: 0; object-fit: cover; background: #151515; }\
+          .dm-fallback { display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1px solid rgba(255,255,255,0.1); }\
+          .dm-title { font-weight: 700; font-size: 14px; margin: 0; }\
+          .dm-subtitle { font-size: 12px; color: #999; margin: 2px 0 0; }\
+          .dm-hero { text-align: center; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }\
+          .dm-avatar { width: 72px; height: 72px; border-radius: 999px; object-fit: cover; border: 2px solid rgba(255,255,255,0.8); margin-bottom: 10px; }\
+          .dm-logo { height: 32px; margin-bottom: 8px; }\
+          .dm-tagline { color: #bbb; font-size: 13px; margin: 0 0 10px; }\
+          .dm-socials { display: flex; justify-content: center; gap: 10px; font-size: 12px; color: #888; }\
+          .dm-pill { border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; padding: 3px 10px; }\
+        "
+      );
+
+      function entryList(entry, field) {
+        var val = entry.getIn(["data", field]);
+        return val ? val.toArray() : [];
+      }
+
+      var LinksPreview = createClass({
+        render: function () {
+          var getAsset = this.props.getAsset;
+          var items = entryList(this.props.entry, "items");
+
+          return h(
+            "div",
+            {},
+            previewStyles,
+            h(
+              "p",
+              { className: "dm-heading" },
+              items.length + " links — shown in current list order"
+            ),
+            items.map(function (item, i) {
+              var image = item.get("image");
+              var published = item.get("published") !== false;
+              return h(
+                "div",
+                { className: "dm-card" + (published ? "" : " hidden"), key: i },
+                image
+                  ? h("img", { className: "dm-thumb", src: getAsset(image).toString() })
+                  : h("div", { className: "dm-fallback" }, "🔗"),
+                h(
+                  "div",
+                  {},
+                  h("p", { className: "dm-title" }, item.get("title")),
+                  item.get("subtitle")
+                    ? h("p", { className: "dm-subtitle" }, item.get("subtitle"))
+                    : null,
+                  published ? null : h("p", { className: "dm-subtitle" }, "Hidden (unpublished)")
+                )
+              );
+            })
+          );
+        },
+      });
+
+      var EventsPreview = createClass({
+        render: function () {
+          var getAsset = this.props.getAsset;
+          var items = entryList(this.props.entry, "items");
+
+          return h(
+            "div",
+            {},
+            previewStyles,
+            h(
+              "p",
+              { className: "dm-heading" },
+              items.length + " events — shown in current list order"
+            ),
+            items.map(function (item, i) {
+              var image = item.get("image");
+              var published = item.get("published") !== false;
+              return h(
+                "div",
+                { className: "dm-card" + (published ? "" : " hidden"), key: i },
+                image
+                  ? h("img", { className: "dm-thumb", src: getAsset(image).toString() })
+                  : h("div", { className: "dm-fallback" }, "🎪"),
+                h(
+                  "div",
+                  {},
+                  h("p", { className: "dm-title" }, item.get("title")),
+                  item.get("subtitle")
+                    ? h("p", { className: "dm-subtitle" }, item.get("subtitle"))
+                    : null,
+                  published ? null : h("p", { className: "dm-subtitle" }, "Hidden (unpublished)")
+                )
+              );
+            })
+          );
+        },
+      });
+
+      var SettingsPreview = createClass({
+        render: function () {
+          var getAsset = this.props.getAsset;
+          var entry = this.props.entry;
+          var profileImage = entry.getIn(["data", "profileImage"]);
+          var logo = entry.getIn(["data", "logo"]);
+          var tagline = entry.getIn(["data", "tagline"]);
+          var socials = entryList(entry, "socialLinks");
+
+          return h(
+            "div",
+            {},
+            previewStyles,
+            h(
+              "div",
+              { className: "dm-hero" },
+              profileImage
+                ? h("img", { className: "dm-avatar", src: getAsset(profileImage).toString() })
+                : null,
+              logo ? h("img", { className: "dm-logo", src: getAsset(logo).toString() }) : null,
+              tagline ? h("p", { className: "dm-tagline" }, tagline) : null,
+              h(
+                "div",
+                { className: "dm-socials" },
+                socials.map(function (s, i) {
+                  return h("span", { className: "dm-pill", key: i }, s.get("platform"));
+                })
+              )
+            )
+          );
+        },
+      });
+
+      // For "files:" collections, registerPreviewTemplate keys off the
+      // individual file's `name`, not the parent collection's `name`.
+      CMS.registerPreviewTemplate("all-links", LinksPreview);
+      CMS.registerPreviewTemplate("all-events", EventsPreview);
+      CMS.registerPreviewTemplate("general", SettingsPreview);
     </script>
   </body>
 </html>
